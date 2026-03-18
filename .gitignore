@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+storybook-static/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Figma tokens (generated / secrets)
+tools/figma-tokens/raw-figma-tokens.json
+tools/figma-tokens/tokens.json
+
+# Storybook cache
+.storybook/cache/
+**/.cache/
+
+# pnpm
+.pnpm-store/
+.pnpm-lock.yaml
+
+# omc
+.omc
+
+# macOS
+**/.DS_Store
+DS_Store
+
+# OMC internal state
+**/.omc/

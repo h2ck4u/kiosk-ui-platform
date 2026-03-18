@@ -1,0 +1,18 @@
+{
+  "name": "kiosk-ui-platform",
+  "version": "1.0.0",
+  "description": "Kiosk UI Platform - Monorepo for @kiosk-ui design system",
+  "private": true,
+  "scripts": {
+    "build": "pnpm --filter @kiosk-ui/components build",
+    "dev": "pnpm --filter @kiosk-ui/components dev",
+    "storybook": "pnpm --filter @kiosk-ui/components storybook",
+    "build-storybook": "pnpm --filter @kiosk-ui/components build-storybook",
+    "type-check": "pnpm --filter @kiosk-ui/components type-check",
+    "tokens:sync": "pnpm --filter kiosk-figma-tokens sync:build-only",
+    "tokens:sync:figma": "pnpm --filter kiosk-figma-tokens sync"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
