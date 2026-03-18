@@ -7,6 +7,11 @@ import type { DisplayMode } from '../../types/kiosk'
  * 1080×1920 세로형 키오스크 화면의 공통 구조를 제공합니다.
  * header / content / footer 영역은 소비자가 자유롭게 채웁니다.
  *
+ * **mode별 레이아웃 차이:**
+ * - normal: 컨텐츠 중앙 정렬
+ * - high-contrast: 컨텐츠 중앙 정렬 + 흑백 고대비 색상 (KWCAG 2.2)
+ * - low-power: 컨텐츠 **하단 정렬** — 휠체어 사용자가 손이 닿도록 UI를 화면 아래쪽에 배치
+ *
  * @example
  * // 무인민원발급기
  * <KioskLayout
@@ -129,7 +134,8 @@ export function KioskLayout({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
+          // 낮은화면 모드: 휠체어 사용자가 손이 닿도록 컨텐츠를 하단 정렬
+          justifyContent: mode === 'low-power' ? 'flex-end' : 'center',
           padding: 24,
         }}
       >
