@@ -9,11 +9,23 @@ import { NavigationButton } from '../components/navigation-button/navigation-but
 import {
   KioskHeader,
   KioskFooter,
+  KioskHomeFooter,
+  KioskBottomNav,
   STEPS,
   CERT_LIST_PAGE1,
   SCALE,
 } from './_screen-helpers'
+import { FloatingActionButton } from '../components/floating-action-button/floating-action-button'
+import { CategoryTabBar } from '../components/category-tab-bar/category-tab-bar'
 import type { DisplayMode, Locale } from '../types/kiosk'
+
+const CERT_TABS = [
+  { id: 'search', label: '증명서찾기' },
+  { id: 'quick', label: '간편발급' },
+  { id: 'large', label: '큰글씨 보기' },
+  { id: 'location', label: '설치장소' },
+  { id: 'info', label: '이용안내' },
+]
 
 /**
  * 무인민원발급기 화면 개요 스토리
@@ -166,44 +178,48 @@ export const FullFlow: Story = {
     const [lowScreen, setLowScreen] = useState(false)
     const [locale, setLocale] = useState<Locale>('ko')
     const [sel, setSel] = useState<string | null>(null)
+    const [activeTab, setActiveTab] = useState('search')
 
     const next = () => setScreenIdx(i => Math.min(i + 1, screens.length - 1))
     const prev = () => setScreenIdx(i => Math.max(0, i - 1))
     const home = () => { setScreenIdx(0); setSel(null) }
 
     const header = <KioskHeader mode={mode} locale={locale} onHome={home} onCall={() => {}} />
-    const footer = <KioskFooter mode={mode} locale={locale} />
+    const footer = <KioskBottomNav mode={mode} locale={locale} />
 
     const screens = [
-      // 0: 시작안내
+      // 0: 시작안내 (로고 전용 헤더 + 홈 푸터)
       <KioskLayout key={0} scale={SCALE} mode={mode} lowScreen={lowScreen}
-        header={<KioskHeader mode={mode} locale={locale} />}
-        footer={footer}
+        header={
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 88, background: mode === 'high-contrast' ? '#000' : '#FBFBFB' }}>
+            <span style={{ fontSize: 30, fontWeight: 700, color: mode === 'high-contrast' ? '#fff' : '#333' }}>🔵 시민구청</span>
+          </div>
+        }
+        footer={<KioskHomeFooter locale={locale} onLangChange={lang => setLocale(lang)} />}
       >
         <div style={{ textAlign: 'center', width: '100%' }}>
           <InfoArea mode={mode} />
           <TextButton
-            label="시작하기" intent="primary" mode={mode}
+            label="🖐 시작하기" intent="primary" mode={mode}
             width={550} height={180} onClick={next}
             style={{ fontSize: 50, borderRadius: 15 }}
           />
         </div>
       </KioskLayout>,
 
-      // 1: 증명서 선택
+      // 1: 증명서 선택 (CategoryTabBar + 3열 그리드)
       <KioskLayout key={1} scale={SCALE} mode={mode} lowScreen={lowScreen}
         header={header}
-        subHeader={<StepProgress steps={STEPS} currentStep={0} mode={mode} />}
+        subHeader={
+          <>
+            <StepProgress steps={STEPS} currentStep={0} mode={mode} />
+            <CategoryTabBar tabs={CERT_TABS} activeTab={activeTab} onTabChange={setActiveTab} mode={mode} />
+          </>
+        }
         footer={footer}
       >
-        <div style={{ width: '100%' }}>
-          <p style={{
-            fontSize: 32, fontWeight: 700, marginBottom: 24, textAlign: 'center',
-            color: '#333',
-          }}>
-            발급받을 증명서를 선택하세요
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 24 }}>
+        <div style={{ width: '100%', padding: '24px 16px', boxSizing: 'border-box' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginBottom: 24 }}>
             {CERT_LIST_PAGE1.map(item => (
               <ListItemButton
                 key={item.name}
@@ -218,29 +234,31 @@ export const FullFlow: Story = {
         </div>
       </KioskLayout>,
 
-      // 2: 결제 수단 선택
-      <KioskLayout key={2} scale={SCALE} mode={mode} lowScreen={lowScreen}
-        header={header}
-        subHeader={<StepProgress steps={STEPS} currentStep={4} mode={mode} />}
-        footer={footer}
-      >
-        <div style={{ textAlign: 'center', width: '100%' }}>
-          <p style={{
-            fontSize: 34, fontWeight: 700, marginBottom: 40,
-            color: '#333',
-          }}>
-            결제 수단을 선택하세요
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'center', marginBottom: 32 }}>
-            <PaymentButton variant="card"        mode={mode} locale={locale} onClick={next} />
-            <PaymentButton variant="samsung-pay" mode={mode} locale={locale} onClick={next} />
-            <PaymentButton variant="mobile"      mode={mode} locale={locale} onClick={next} />
-            <PaymentButton variant="barcode"     mode={mode} locale={locale} onClick={next} />
-            <PaymentButton variant="gift-card"   mode={mode} locale={locale} onClick={next} />
+      // 2: 결제 수단 선택 (KioskBottomNav + FAB)
+      <div key={2} style={{ position: 'relative' }}>
+        <KioskLayout scale={SCALE} mode={mode} lowScreen={lowScreen}
+          header={header}
+          subHeader={<StepProgress steps={STEPS} currentStep={4} mode={mode} />}
+          footer={footer}
+        >
+          <div style={{ textAlign: 'center', width: '100%' }}>
+            <p style={{ fontSize: 34, fontWeight: 700, marginBottom: 40, color: mode === 'high-contrast' ? '#000' : '#333' }}>
+              결제 수단을 선택하세요
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'center', marginBottom: 32 }}>
+              <PaymentButton variant="card"        mode={mode} locale={locale} onClick={next} />
+              <PaymentButton variant="samsung-pay" mode={mode} locale={locale} onClick={next} />
+              <PaymentButton variant="mobile"      mode={mode} locale={locale} onClick={next} />
+              <PaymentButton variant="barcode"     mode={mode} locale={locale} onClick={next} />
+              <PaymentButton variant="gift-card"   mode={mode} locale={locale} onClick={next} />
+            </div>
+            <TextButton label="이전" intent="secondary" mode={mode} size="sm" onClick={prev} />
           </div>
-          <TextButton label="이전" intent="secondary" mode={mode} size="sm" onClick={prev} />
+        </KioskLayout>
+        <div style={{ position: 'absolute', bottom: `${115 * SCALE + 16}px`, right: 16, transform: `scale(${SCALE})`, transformOrigin: 'bottom right' }}>
+          <FloatingActionButton mode={mode} />
         </div>
-      </KioskLayout>,
+      </div>,
 
       // 3: 완료
       <KioskLayout key={3} scale={SCALE} mode={mode} lowScreen={lowScreen}
