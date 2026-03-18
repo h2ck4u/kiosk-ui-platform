@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { LanguageSelector } from './LanguageSelector'
+import React, { useState } from 'react'
 import type { LanguageCode } from '../../types/kiosk'
+import { LanguageSelector } from './language-selector'
 
 const meta: Meta<typeof LanguageSelector> = {
   title: 'Kiosk/LanguageSelector',

@@ -43,7 +43,6 @@ tools/figma-tokens/tokens.json
 
 # pnpm
 .pnpm-store/
-.pnpm-lock.yaml
 
 # omc
 .omc
@@ -54,3 +53,6 @@ DS_Store
 
 # OMC internal state
 **/.omc/
+
+# Git worktrees
+.worktrees/
