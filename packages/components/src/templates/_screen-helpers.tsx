@@ -9,7 +9,7 @@ import { StaffCallButton } from '../components/staff-call-button/staff-call-butt
 import { LanguageSelector } from '../components/language-selector/language-selector'
 import { LanguageIconButton } from '../components/language-icon-button/language-icon-button'
 import { AccessibilityButton } from '../components/accessibility-button/accessibility-button'
-import type { DisplayMode, Locale } from '../types/kiosk'
+import type { DisplayMode, Locale, LanguageCode } from '../types/kiosk'
 
 // ── 공통 상수 ──────────────────────────────────────────────────────────────────
 
@@ -96,7 +96,10 @@ export function KioskHeader({ mode, locale, onHome, onCall }: {
 
 /**
  * KioskHomeFooter — 홈 화면 전용 푸터 (115px)
- * 어두운 배경 + 언어 텍스트 라디오 + 접근성 버튼
+ * XFrame5 10306 하단 패널 재현:
+ * - 배경: #FBFBFB (밝은 회색)
+ * - 언어 버튼: LanguageSelector (200×80px, 국기 PNG, 선택 상태 흰색 텍스트)
+ * - 접근성 버튼: AccessibilityButton
  */
 export function KioskHomeFooter({ locale, onLangChange, onAccessibility }: {
   locale?: Locale
@@ -104,12 +107,7 @@ export function KioskHomeFooter({ locale, onLangChange, onAccessibility }: {
   onAccessibility?: () => void
 }) {
   const currentLocale = locale ?? 'ko'
-  const langs: Array<{ code: Locale; label: string }> = [
-    { code: 'ko', label: '한국어' },
-    { code: 'en', label: 'English' },
-    { code: 'zh', label: '中國語' },
-    { code: 'ja', label: '日本語' },
-  ]
+  const langs: LanguageCode[] = ['ko', 'en', 'zh', 'ja']
 
   return (
     <div style={{
@@ -117,36 +115,17 @@ export function KioskHomeFooter({ locale, onLangChange, onAccessibility }: {
       alignItems: 'center',
       width: '100%',
       height: 115,
-      background: '#2a2a2a',
-      padding: '0 14px',
+      background: '#FBFBFB',
       boxSizing: 'border-box',
-      gap: 4,
     }}>
-      {langs.map(({ code, label }) => (
-        <button
+      {langs.map(code => (
+        <LanguageSelector
           key={code}
-          type="button"
-          onClick={() => onLangChange?.(code)}
-          style={{
-            flex: 1,
-            height: 80,
-            background: 'transparent',
-            border: 'none',
-            cursor: 'pointer',
-            color: currentLocale === code ? '#ffffff' : '#999999',
-            fontFamily: 'Noto Sans CJK KR, Noto Sans KR, sans-serif',
-            fontSize: 28,
-            fontWeight: currentLocale === code ? 700 : 400,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 4,
-          }}
-        >
-          {currentLocale === code && <span style={{ fontSize: 20 }}>●</span>}
-          {label}
-          <span style={{ fontSize: 20, color: '#666' }}>●</span>
-        </button>
+          language={code}
+          locale={currentLocale}
+          selected={code === currentLocale}
+          onSelect={lang => onLangChange?.(lang as Locale)}
+        />
       ))}
       <AccessibilityButton mode="normal" locale="ko" onClick={onAccessibility} />
     </div>

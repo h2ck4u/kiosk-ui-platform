@@ -26,6 +26,8 @@ export interface LanguageSelectorProps {
   /** Current UI locale */
   locale?: Locale
   mode?: DisplayMode
+  /** Whether this language is currently selected (shows hover image + white text) */
+  selected?: boolean
   disabled?: boolean
   /** Called when user selects this language */
   onSelect?: (language: LanguageCode) => void
@@ -36,6 +38,7 @@ export function LanguageSelector({
   language,
   locale = 'ko',
   mode = 'normal',
+  selected = false,
   disabled = false,
   onSelect,
   className,
@@ -43,11 +46,21 @@ export function LanguageSelector({
   const [isHovered, setIsHovered] = useState(false)
 
   const assets = languageAssets[language]
+  // XFrame5: disabled → 이미지 없음, selected/hovered → hover 이미지, else → normal 이미지
   const imgSrc = disabled
-    ? assets.disabled
-    : isHovered
+    ? 'none'
+    : (selected || isHovered)
     ? assets.hover
     : assets.normal
+
+  // XFrame5: selected/hovered → 흰색, disabled → 회색(#b4b4b4), else → 어두운색
+  const textColor = mode === 'high-contrast'
+    ? (disabled ? '#999' : '#000')
+    : disabled
+    ? 'rgb(180, 180, 180)'
+    : (selected || isHovered)
+    ? 'rgb(248, 248, 248)'
+    : '#0a0a0a'
 
   const { labels, paddingRight } = LABEL_CONFIG[language]
   const label = labels[locale]
@@ -55,6 +68,8 @@ export function LanguageSelector({
   return (
     <button
       type="button"
+      role="radio"
+      aria-checked={selected}
       aria-label={label}
       aria-disabled={disabled}
       disabled={disabled}
@@ -64,13 +79,14 @@ export function LanguageSelector({
       onFocus={() => !disabled && setIsHovered(true)}
       onBlur={() => setIsHovered(false)}
       data-mode={mode}
+      data-selected={selected}
       className={`kiosk-language-selector ${className ?? ''}`.trim()}
       style={{
         // XFrame5 원본 치수
         width: 200,
         height: 80,
         // 국기 PNG를 배경으로 (아이콘 포함) — XFrame5 _xf_rdo 구조
-        backgroundImage: `url(${imgSrc})`,
+        backgroundImage: imgSrc === 'none' ? 'none' : `url(${imgSrc})`,
         backgroundSize: 'auto',        // 자연 크기(200×80px)
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'left center',
@@ -85,7 +101,6 @@ export function LanguageSelector({
         paddingRight: 0,
         // 상태
         cursor: disabled ? 'not-allowed' : 'pointer',
-        opacity: disabled ? 0.4 : 1,
         transition: 'opacity 0.15s',
       }}
     >
@@ -94,7 +109,7 @@ export function LanguageSelector({
         fontSize: 34,
         fontWeight: 'normal',
         letterSpacing: '-2.1px',
-        color: mode === 'high-contrast' ? '#000000' : '#0a0a0a',
+        color: textColor,
         paddingRight,
         whiteSpace: 'nowrap',
         pointerEvents: 'none',
