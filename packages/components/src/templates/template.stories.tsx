@@ -33,8 +33,8 @@ type Story = StoryObj
 // ── 광고/정보 영역 placeholder ────────────────────────────────────────────────
 
 function InfoArea({ mode }: { mode: DisplayMode }) {
-  const bg = mode === 'low-power' ? '#1a1a1a' : mode === 'high-contrast' ? '#000' : '#e8e8e8'
-  const color = mode === 'low-power' ? '#555' : mode === 'high-contrast' ? '#fff' : '#888'
+  const bg = mode === 'high-contrast' ? '#000' : '#e8e8e8'
+  const color = mode === 'high-contrast' ? '#fff' : '#888'
   return (
     <div style={{
       width: 800, height: 900, background: bg, borderRadius: 12,
@@ -90,18 +90,18 @@ export const HighContrast: Story = {
   ),
 }
 
-/** 낮은 화면(저전력) 모드 — 시작안내 */
-export const LowPower: Story = {
-  name: '낮은 화면 (Low Power)',
+/** 낮은 화면 모드 — 시작안내 (lowScreen: 컨텐츠 하단 정렬) */
+export const LowScreen: Story = {
+  name: '낮은 화면 (Low Screen)',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <div style={{ textAlign: 'center', width: '100%' }}>
-        <InfoArea mode="low-power" />
+        <InfoArea mode="normal" />
         <TextButton
-          label="시작하기" intent="primary" mode="low-power"
+          label="시작하기" intent="primary"
           width={550} height={180}
           style={{ fontSize: 50, borderRadius: 15 }}
         />
@@ -118,19 +118,19 @@ export const LowPower: Story = {
 export const ModeComparison: Story = {
   name: '3가지 모드 비교 (시작안내)',
   render: () => {
-    const modes: Array<{ mode: DisplayMode; label: string }> = [
+    const modes: Array<{ mode: DisplayMode; label: string; lowScreen?: boolean }> = [
       { mode: 'normal',        label: '기본 (Normal)' },
       { mode: 'high-contrast', label: '고대비 (High Contrast)' },
-      { mode: 'low-power',     label: '낮은 화면 (Low Power)' },
+      { mode: 'normal',        label: '낮은 화면 (Low Screen)', lowScreen: true },
     ]
     return (
       <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', justifyContent: 'center' }}>
-        {modes.map(({ mode, label }) => (
-          <div key={mode} style={{ textAlign: 'center' }}>
+        {modes.map(({ mode, label, lowScreen }) => (
+          <div key={label} style={{ textAlign: 'center' }}>
             <p style={{ fontSize: 12, fontWeight: 700, marginBottom: 8, color: '#555' }}>
               {label}
             </p>
-            <KioskLayout scale={0.2} mode={mode}
+            <KioskLayout scale={0.2} mode={mode} lowScreen={lowScreen}
               header={<KioskHeader mode={mode} locale="ko" />}
               footer={<KioskFooter mode={mode} locale="ko" />}
             >
@@ -198,7 +198,7 @@ export const FullFlow: Story = {
         <div style={{ width: '100%' }}>
           <p style={{
             fontSize: 32, fontWeight: 700, marginBottom: 24, textAlign: 'center',
-            color: mode === 'low-power' ? '#ccc' : '#333',
+            color: '#333',
           }}>
             발급받을 증명서를 선택하세요
           </p>
@@ -226,7 +226,7 @@ export const FullFlow: Story = {
         <div style={{ textAlign: 'center', width: '100%' }}>
           <p style={{
             fontSize: 34, fontWeight: 700, marginBottom: 40,
-            color: mode === 'low-power' ? '#ccc' : '#333',
+            color: '#333',
           }}>
             결제 수단을 선택하세요
           </p>
@@ -250,13 +250,13 @@ export const FullFlow: Story = {
           <div style={{ fontSize: 100, marginBottom: 32 }}>✅</div>
           <p style={{
             fontSize: 40, fontWeight: 700, marginBottom: 16,
-            color: mode === 'low-power' ? '#ccc' : '#333',
+            color: '#333',
           }}>
             이용해주셔서 감사합니다
           </p>
           <p style={{
             fontSize: 28, marginBottom: 48,
-            color: mode === 'low-power' ? '#888' : '#666',
+            color: '#666',
           }}>
             잊으신 물건 없이 안녕히 가세요
           </p>
@@ -287,7 +287,6 @@ export const FullFlow: Story = {
           <select value={mode} onChange={e => setMode(e.target.value as DisplayMode)} style={{ fontSize: 13 }}>
             <option value="normal">normal</option>
             <option value="high-contrast">high-contrast</option>
-            <option value="low-power">low-power</option>
           </select>
           <select value={locale} onChange={e => setLocale(e.target.value as Locale)} style={{ fontSize: 13 }}>
             <option value="ko">한국어</option>

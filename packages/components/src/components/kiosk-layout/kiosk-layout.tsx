@@ -10,7 +10,10 @@ import type { DisplayMode } from '../../types/kiosk'
  * **mode별 레이아웃 차이:**
  * - normal: 컨텐츠 중앙 정렬
  * - high-contrast: 컨텐츠 중앙 정렬 + 흑백 고대비 색상 (KWCAG 2.2)
- * - low-power: 컨텐츠 **하단 정렬** — 휠체어 사용자가 손이 닿도록 UI를 화면 아래쪽에 배치
+ *
+ * **lowScreen prop:**
+ * - 낮은화면 모드 — 컨텐츠를 하단 정렬해 휠체어 사용자 접근성 제공
+ * - normal / high-contrast 위에 orthogonal하게 적용
  *
  * @example
  * // 무인민원발급기
@@ -36,6 +39,8 @@ import type { DisplayMode } from '../../types/kiosk'
 export interface KioskLayoutProps {
   /** 화면 표시 모드 */
   mode?: DisplayMode
+  /** 낮은화면 모드 — 컨텐츠를 하단 정렬해 휠체어 사용자 접근성 제공 */
+  lowScreen?: boolean
   /** 상단 영역 — 로고, 기관명 등 */
   header?: React.ReactNode
   /** 헤더 하단 보조 영역 — 단계표시, 네비게이션 등 */
@@ -60,6 +65,7 @@ export interface KioskLayoutProps {
 
 export function KioskLayout({
   mode = 'normal',
+  lowScreen = false,
   header,
   subHeader,
   children,
@@ -71,7 +77,7 @@ export function KioskLayout({
   className,
   scale,
 }: KioskLayoutProps) {
-  const bgColor = mode === 'low-power' ? '#111111' : mode === 'high-contrast' ? '#ffffff' : '#f1f1f1'
+  const bgColor = mode === 'high-contrast' ? '#ffffff' : '#f1f1f1'
   const borderColor = mode === 'high-contrast' ? '#000000' : '#d6d6d6'
 
   const inner = (
@@ -98,7 +104,7 @@ export function KioskLayout({
             width: '100%',
             height: headerHeight,
             flexShrink: 0,
-            background: mode === 'low-power' ? '#1a1a1a' : '#fbfbfb',
+            background: '#fbfbfb',
             borderBottom: `1px solid ${borderColor}`,
             display: 'flex',
             alignItems: 'center',
@@ -117,7 +123,7 @@ export function KioskLayout({
           style={{
             width: '100%',
             flexShrink: 0,
-            background: mode === 'low-power' ? '#1a1a1a' : '#ffffff',
+            background: '#ffffff',
             borderBottom: `1px solid ${borderColor}`,
           }}
         >
@@ -135,7 +141,7 @@ export function KioskLayout({
           flexDirection: 'column',
           alignItems: 'center',
           // 낮은화면 모드: 휠체어 사용자가 손이 닿도록 컨텐츠를 하단 정렬
-          justifyContent: mode === 'low-power' ? 'flex-end' : 'center',
+          justifyContent: lowScreen ? 'flex-end' : 'center',
           padding: 24,
         }}
       >
@@ -150,7 +156,7 @@ export function KioskLayout({
             width: '100%',
             height: footerHeight,
             flexShrink: 0,
-            background: mode === 'low-power' ? '#1a1a1a' : '#fbfbfb',
+            background: '#fbfbfb',
             borderTop: `1px solid ${borderColor}`,
             display: 'flex',
             alignItems: 'center',

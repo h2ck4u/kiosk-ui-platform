@@ -43,11 +43,11 @@ export function StepProgress({
   mode = 'normal',
   className,
 }: StepProgressProps) {
-  const activeColor = mode === 'high-contrast' ? '#000000' : mode === 'low-power' ? '#888888' : '#1a73e8'
-  const inactiveColor = mode === 'high-contrast' ? '#555555' : mode === 'low-power' ? '#333333' : '#b4b4b4'
-  const textColor = mode === 'low-power' ? '#aaaaaa' : mode === 'high-contrast' ? '#000000' : '#666666'
-  const activeTextColor = mode === 'high-contrast' ? '#000000' : mode === 'low-power' ? '#cccccc' : '#1a73e8'
-  const bgColor = mode === 'low-power' ? '#111111' : mode === 'high-contrast' ? '#ffffff' : '#f8f8f8'
+  const activeColor = mode === 'high-contrast' ? '#000000' : '#1a73e8'
+  const inactiveColor = mode === 'high-contrast' ? '#555555' : '#b4b4b4'
+  const textColor = mode === 'high-contrast' ? '#000000' : '#666666'
+  const activeTextColor = mode === 'high-contrast' ? '#000000' : '#1a73e8'
+  const bgColor = mode === 'high-contrast' ? '#ffffff' : '#f8f8f8'
 
   if (variant === 'dots') {
     return (

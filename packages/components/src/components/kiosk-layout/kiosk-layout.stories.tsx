@@ -10,7 +10,7 @@ const meta: Meta<typeof KioskLayout> = {
   component: KioskLayout,
   tags: ['autodocs'],
   argTypes: {
-    mode:         { control: 'select', options: ['normal', 'high-contrast', 'low-power'] },
+    mode:         { control: 'select', options: ['normal', 'high-contrast'] },
     headerHeight: { control: 'number' },
     footerHeight: { control: 'number' },
     scale:        { control: { type: 'range', min: 0.1, max: 1, step: 0.05 } },
@@ -62,13 +62,13 @@ export const WithSubHeader: Story = {
 export const AllModes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 24 }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
+      {(['normal', 'high-contrast'] as const).map((mode) => (
         <div key={mode} style={{ textAlign: 'center' }}>
           <p style={{ fontSize: 11, marginBottom: 8 }}>{mode}</p>
           <KioskLayout
             mode={mode}
             scale={0.22}
-            header={<span style={{ fontSize: 28, fontWeight: 700, color: mode === 'low-power' ? '#ccc' : '#333' }}>시민구청</span>}
+            header={<span style={{ fontSize: 28, fontWeight: 700, color: '#333' }}>시민구청</span>}
             footer={<div style={{ padding: 12, fontSize: 18, color: '#888' }}>하단영역</div>}
           >
             <TextButton label="시작하기" intent="primary" size="lg" mode={mode} />

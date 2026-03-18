@@ -2,9 +2,8 @@
  * Display mode for the kiosk terminal
  * - normal: 기본 모드
  * - high-contrast: 고대비 모드 (KWCAG 2.2, 색 대비 4.5:1 이상)
- * - low-power: 낮은화면 모드 — 휠체어 사용자를 위해 컨텐츠를 화면 하단에 배치
  */
-export type DisplayMode = 'normal' | 'high-contrast' | 'low-power'
+export type DisplayMode = 'normal' | 'high-contrast'
 
 /** Supported locale codes */
 export type Locale = 'ko' | 'en' | 'ja' | 'zh'

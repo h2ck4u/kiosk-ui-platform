@@ -41,20 +41,11 @@ export function LanguageRadioButton({
 
   const active = selected || isHovered
 
-  let imgSrc: string
-  if (disabled) {
-    imgSrc = mode === 'low-power'
-      ? languageRadioAssets['low-power_disabled']
-      : languageRadioAssets.disabled
-  } else if (mode === 'low-power') {
-    imgSrc = active
-      ? languageRadioAssets['low-power_hover']
-      : languageRadioAssets['low-power']
-  } else {
-    imgSrc = active
+  const imgSrc: string = disabled
+    ? languageRadioAssets.disabled
+    : active
       ? languageRadioAssets.hover
       : languageRadioAssets.normal
-  }
 
   const label = ARIA_LABELS[language][locale]
   const displayText = LABELS[language]
@@ -106,7 +97,7 @@ export function LanguageRadioButton({
           fontFamily: 'var(--kiosk-font-family)',
           fontSize: '32px',
           fontWeight: 700,
-          color: mode === 'low-power' ? 'var(--kiosk-color-text-primary)' : 'rgb(51,51,51)',
+          color: 'rgb(51,51,51)',
           paddingLeft: language === 'ko' ? 8 : 14,
           display: 'flex',
           alignItems: 'center',

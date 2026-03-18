@@ -763,22 +763,22 @@ export const HC_Screen15_완료: Story = {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// 낮은 화면 모드 (Low Power) — 10306LP.xml → 14개 화면
+// 낮은 화면 모드 (Low Screen) — 10306LP.xml → 14개 화면
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /** LP 01 — 시작안내 */
 export const LP_Screen01_시작안내: Story = {
   name: '낮은화면 01 · 시작안내',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <div style={{ textAlign: 'center' }}>
-        <div style={{ width: 700, height: 700, background: '#1a1a1a', border: '1px solid #444', borderRadius: 12, margin: '0 auto 60px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666', fontSize: 28 }}>
+        <div style={{ width: 700, height: 700, background: '#e8e8e8', border: '1px solid #ccc', borderRadius: 12, margin: '0 auto 60px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#888', fontSize: 28 }}>
           정보 영역
         </div>
-        <TextButton label="시작하기" intent="primary" mode="low-power" width={550} height={180} style={{ fontSize: 50, borderRadius: 15 }} />
+        <TextButton label="시작하기" intent="primary" mode="normal" width={550} height={180} style={{ fontSize: 50, borderRadius: 15 }} />
       </div>
     </KioskLayout>
   ),
@@ -792,22 +792,22 @@ export const LP_Screen02_기본선택_증명종류: Story = {
     const [sel, setSel] = useState<string | null>(null)
     const pages = [CERT_LIST_PAGE1, CERT_LIST_PAGE2]
     return (
-      <KioskLayout scale={SCALE} mode="low-power"
-        header={<KioskHeader mode="low-power" locale="ko" onCall={() => {}} onHome={() => {}} />}
-        subHeader={<StepProgress steps={STEPS} currentStep={0} mode="low-power" />}
-        footer={<KioskFooter mode="low-power" locale="ko" />}
+      <KioskLayout scale={SCALE} mode="normal" lowScreen
+        header={<KioskHeader mode="normal" locale="ko" onCall={() => {}} onHome={() => {}} />}
+        subHeader={<StepProgress steps={STEPS} currentStep={0} mode="normal" />}
+        footer={<KioskFooter mode="normal" locale="ko" />}
       >
         <div style={{ width: '100%' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24 }}>
             {pages[page].map(item => (
               <ListItemButton key={item.name} primaryText={item.name} secondaryText={item.fee}
-                selected={sel === item.name} onClick={() => setSel(item.name)} mode="low-power" />
+                selected={sel === item.name} onClick={() => setSel(item.name)} mode="normal" />
             ))}
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', gap: 16 }}>
-            <PaginationButton variant="prev" mode="low-power" disabled={page === 0} onClick={() => setPage(0)} />
+            <PaginationButton variant="prev" mode="normal" disabled={page === 0} onClick={() => setPage(0)} />
             <span style={{ color: '#888', fontSize: 24, display: 'flex', alignItems: 'center' }}>{page + 1} / 2</span>
-            <PaginationButton variant="next" mode="low-power" disabled={page === 1} onClick={() => setPage(1)} />
+            <PaginationButton variant="next" mode="normal" disabled={page === 1} onClick={() => setPage(1)} />
           </div>
         </div>
       </KioskLayout>
@@ -822,22 +822,22 @@ export const LP_Screen03_기본선택_증명서: Story = {
     const [sel, setSel] = useState<string | null>(null)
     const items = [{ name: '주민등록표 초본', fee: '200원' }, { name: '주민등록표 등본', fee: '200원' }]
     return (
-      <KioskLayout scale={SCALE} mode="low-power"
-        header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} onCall={() => {}} />}
-        subHeader={<StepProgress steps={STEPS} currentStep={0} mode="low-power" />}
-        footer={<KioskFooter mode="low-power" locale="ko" />}
+      <KioskLayout scale={SCALE} mode="normal" lowScreen
+        header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} onCall={() => {}} />}
+        subHeader={<StepProgress steps={STEPS} currentStep={0} mode="normal" />}
+        footer={<KioskFooter mode="normal" locale="ko" />}
       >
         <div style={{ width: '100%', textAlign: 'center' }}>
-          <p style={{ fontSize: 30, color: '#ccc', marginBottom: 32 }}>발급을 원하시는 증명서를 선택 후 완료 버튼을 누르세요.</p>
+          <p style={{ fontSize: 30, color: '#333', marginBottom: 32 }}>발급을 원하시는 증명서를 선택 후 완료 버튼을 누르세요.</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 40 }}>
             {items.map(item => (
               <ListItemButton key={item.name} primaryText={item.name} secondaryText={item.fee}
-                selected={sel === item.name} onClick={() => setSel(item.name)} mode="low-power" />
+                selected={sel === item.name} onClick={() => setSel(item.name)} mode="normal" />
             ))}
           </div>
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
-            <TextButton label="취소" intent="secondary" size="md" mode="low-power" />
-            <TextButton label="완료" intent="primary" size="md" mode="low-power" disabled={!sel} />
+            <TextButton label="취소" intent="secondary" size="md" mode="normal" />
+            <TextButton label="완료" intent="primary" size="md" mode="normal" disabled={!sel} />
           </div>
         </div>
       </KioskLayout>
@@ -849,15 +849,15 @@ export const LP_Screen03_기본선택_증명서: Story = {
 export const LP_Screen04_본인확인_주민등록번호: Story = {
   name: '낮은화면 04 · 본인확인(주민등록번호)',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} onCall={() => {}} />}
-      subHeader={<StepProgress steps={STEPS} currentStep={1} mode="low-power" />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} onCall={() => {}} />}
+      subHeader={<StepProgress steps={STEPS} currentStep={1} mode="normal" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <NumpadInput
         label="주민등록번호 앞 6자리를 입력하세요"
         maxLength={6}
-        mode="low-power"
+        mode="normal"
         confirmLabel="다음"
         cancelLabel="취소"
       />
@@ -869,17 +869,17 @@ export const LP_Screen04_본인확인_주민등록번호: Story = {
 export const LP_Screen05_본인확인_지문: Story = {
   name: '낮은화면 05 · 본인확인(지문)',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} onCall={() => {}} />}
-      subHeader={<StepProgress steps={STEPS} currentStep={1} mode="low-power" />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} onCall={() => {}} />}
+      subHeader={<StepProgress steps={STEPS} currentStep={1} mode="normal" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <div style={{ textAlign: 'center' }}>
-        <div style={{ width: 400, height: 400, background: '#1a1a1a', border: '1px solid #444', borderRadius: '50%', margin: '0 auto 40px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 80 }}>
+        <div style={{ width: 400, height: 400, background: '#e8e8e8', border: '1px solid #ccc', borderRadius: '50%', margin: '0 auto 40px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 80 }}>
           👆
         </div>
-        <p style={{ fontSize: 32, color: '#ccc', marginBottom: 40 }}>지문인식기에 엄지손가락을 올려주세요</p>
-        <TextButton label="취소" intent="secondary" mode="low-power" size="md" />
+        <p style={{ fontSize: 32, color: '#333', marginBottom: 40 }}>지문인식기에 엄지손가락을 올려주세요</p>
+        <TextButton label="취소" intent="secondary" mode="normal" size="md" />
       </div>
     </KioskLayout>
   ),
@@ -893,24 +893,24 @@ export const LP_Screen06_옵션선택_전체포함: Story = {
     const toggle = (item: string, val: 'include' | 'exclude') =>
       setOpts(o => ({ ...o, [item]: val }))
     return (
-      <KioskLayout scale={SCALE} mode="low-power"
-        header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} onCall={() => {}} />}
-        subHeader={<StepProgress steps={STEPS} currentStep={2} mode="low-power" />}
-        footer={<KioskFooter mode="low-power" locale="ko" />}
+      <KioskLayout scale={SCALE} mode="normal" lowScreen
+        header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} onCall={() => {}} />}
+        subHeader={<StepProgress steps={STEPS} currentStep={2} mode="normal" />}
+        footer={<KioskFooter mode="normal" locale="ko" />}
       >
         <div style={{ width: '100%' }}>
-          <p style={{ fontSize: 30, color: '#ccc', marginBottom: 24, textAlign: 'center' }}>포함할 항목을 선택하세요</p>
+          <p style={{ fontSize: 30, color: '#333', marginBottom: 24, textAlign: 'center' }}>포함할 항목을 선택하세요</p>
           {['주민등록번호', '주소'].map(item => (
-            <div key={item} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 0', borderBottom: '1px solid #333' }}>
-              <span style={{ fontSize: 28, color: '#ccc' }}>{item}</span>
+            <div key={item} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 0', borderBottom: '1px solid #ddd' }}>
+              <span style={{ fontSize: 28, color: '#333' }}>{item}</span>
               <div style={{ display: 'flex', gap: 8 }}>
-                <ToggleButton label="포함" intent="positive" mode="low-power" selected={opts[item] === 'include'} onClick={() => toggle(item, 'include')} width={160} height={72} />
-                <ToggleButton label="미포함" intent="negative" mode="low-power" selected={opts[item] === 'exclude'} onClick={() => toggle(item, 'exclude')} width={160} height={72} />
+                <ToggleButton label="포함" intent="positive" mode="normal" selected={opts[item] === 'include'} onClick={() => toggle(item, 'include')} width={160} height={72} />
+                <ToggleButton label="미포함" intent="negative" mode="normal" selected={opts[item] === 'exclude'} onClick={() => toggle(item, 'exclude')} width={160} height={72} />
               </div>
             </div>
           ))}
           <div style={{ marginTop: 32, textAlign: 'center' }}>
-            <TextButton label="발급하기" intent="primary" mode="low-power" size="lg" />
+            <TextButton label="발급하기" intent="primary" mode="normal" size="lg" />
           </div>
         </div>
       </KioskLayout>
@@ -922,15 +922,15 @@ export const LP_Screen06_옵션선택_전체포함: Story = {
 export const LP_Screen07_옵션선택_신청부수: Story = {
   name: '낮은화면 07 · 옵션선택(신청부수)',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} onCall={() => {}} />}
-      subHeader={<StepProgress steps={STEPS} currentStep={2} mode="low-power" />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} onCall={() => {}} />}
+      subHeader={<StepProgress steps={STEPS} currentStep={2} mode="normal" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <NumpadInput
         label="신청 부수를 입력하세요"
         maxLength={2}
-        mode="low-power"
+        mode="normal"
         confirmLabel="완료"
         cancelLabel="취소"
       />
@@ -942,27 +942,27 @@ export const LP_Screen07_옵션선택_신청부수: Story = {
 export const LP_Screen09_내역확인_무료: Story = {
   name: '낮은화면 09 · 내역확인(무료)',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} onCall={() => {}} />}
-      subHeader={<StepProgress steps={STEPS} currentStep={3} mode="low-power" />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} onCall={() => {}} />}
+      subHeader={<StepProgress steps={STEPS} currentStep={3} mode="normal" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <div style={{ width: '100%', textAlign: 'center' }}>
-        <div style={{ background: '#1a1a1a', border: '1px solid #444', borderRadius: 12, padding: 32, marginBottom: 40, textAlign: 'left' }}>
+        <div style={{ background: '#f8f8f8', border: '1px solid #ddd', borderRadius: 12, padding: 32, marginBottom: 40, textAlign: 'left' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
-            <span style={{ fontSize: 26, color: '#ccc' }}>국세증명서</span>
-            <span style={{ fontSize: 26, fontWeight: 700, color: '#88cc88' }}>무료</span>
+            <span style={{ fontSize: 26, color: '#333' }}>국세증명서</span>
+            <span style={{ fontSize: 26, fontWeight: 700, color: '#228822' }}>무료</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
-            <span style={{ fontSize: 26, color: '#ccc' }}>신청 부수</span>
-            <span style={{ fontSize: 26, color: '#ccc' }}>1부</span>
+            <span style={{ fontSize: 26, color: '#333' }}>신청 부수</span>
+            <span style={{ fontSize: 26, color: '#333' }}>1부</span>
           </div>
-          <div style={{ borderTop: '1px solid #444', paddingTop: 16, display: 'flex', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: 30, fontWeight: 700, color: '#ccc' }}>합계</span>
-            <span style={{ fontSize: 30, fontWeight: 700, color: '#88cc88' }}>무료</span>
+          <div style={{ borderTop: '1px solid #ddd', paddingTop: 16, display: 'flex', justifyContent: 'space-between' }}>
+            <span style={{ fontSize: 30, fontWeight: 700, color: '#333' }}>합계</span>
+            <span style={{ fontSize: 30, fontWeight: 700, color: '#228822' }}>무료</span>
           </div>
         </div>
-        <TextButton label="발급하기" intent="primary" mode="low-power" size="lg" />
+        <TextButton label="발급하기" intent="primary" mode="normal" size="lg" />
       </div>
     </KioskLayout>
   ),
@@ -972,20 +972,20 @@ export const LP_Screen09_내역확인_무료: Story = {
 export const LP_Screen08_결제하기_6버튼: Story = {
   name: '낮은화면 08 · 결제하기(6버튼)',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} onCall={() => {}} />}
-      subHeader={<StepProgress steps={STEPS} currentStep={4} mode="low-power" />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} onCall={() => {}} />}
+      subHeader={<StepProgress steps={STEPS} currentStep={4} mode="normal" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <div style={{ textAlign: 'center', width: '100%' }}>
-        <p style={{ fontSize: 32, fontWeight: 700, color: '#ccc', marginBottom: 32 }}>결제 수단을 선택하세요</p>
+        <p style={{ fontSize: 32, fontWeight: 700, color: '#333', marginBottom: 32 }}>결제 수단을 선택하세요</p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
-          <PaymentButton variant="card" mode="low-power" locale="ko" />
-          <PaymentButton variant="samsung-pay" mode="low-power" locale="ko" />
-          <PaymentButton variant="mobile" mode="low-power" locale="ko" />
-          <PaymentButton variant="barcode" mode="low-power" locale="ko" />
-          <PaymentButton variant="gift-card" mode="low-power" locale="ko" />
-          <TextButton label="현금결제" intent="secondary" mode="low-power" size="md" />
+          <PaymentButton variant="card" mode="normal" locale="ko" />
+          <PaymentButton variant="samsung-pay" mode="normal" locale="ko" />
+          <PaymentButton variant="mobile" mode="normal" locale="ko" />
+          <PaymentButton variant="barcode" mode="normal" locale="ko" />
+          <PaymentButton variant="gift-card" mode="normal" locale="ko" />
+          <TextButton label="현금결제" intent="secondary" mode="normal" size="md" />
         </div>
       </div>
     </KioskLayout>
@@ -996,18 +996,18 @@ export const LP_Screen08_결제하기_6버튼: Story = {
 export const LP_Screen10_결제하기_결제진행: Story = {
   name: '낮은화면 10 · 결제하기(카드결제)',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} onCall={() => {}} />}
-      subHeader={<StepProgress steps={STEPS} currentStep={4} mode="low-power" />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} onCall={() => {}} />}
+      subHeader={<StepProgress steps={STEPS} currentStep={4} mode="normal" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <div style={{ textAlign: 'center' }}>
-        <PaymentButton variant="card" mode="low-power" locale="ko" />
-        <p style={{ fontSize: 32, color: '#ccc', marginTop: 40, marginBottom: 20 }}>카드를 단말기에 꽂아주세요</p>
-        <div style={{ width: 300, height: 8, background: '#333', borderRadius: 4, margin: '0 auto 40px', overflow: 'hidden' }}>
+        <PaymentButton variant="card" mode="normal" locale="ko" />
+        <p style={{ fontSize: 32, color: '#333', marginTop: 40, marginBottom: 20 }}>카드를 단말기에 꽂아주세요</p>
+        <div style={{ width: 300, height: 8, background: '#ddd', borderRadius: 4, margin: '0 auto 40px', overflow: 'hidden' }}>
           <div style={{ width: '60%', height: '100%', background: '#888' }} />
         </div>
-        <TextButton label="이전" intent="secondary" mode="low-power" size="sm" />
+        <TextButton label="이전" intent="secondary" mode="normal" size="sm" />
       </div>
     </KioskLayout>
   ),
@@ -1017,16 +1017,16 @@ export const LP_Screen10_결제하기_결제진행: Story = {
 export const LP_Screen11_발권: Story = {
   name: '낮은화면 11 · 발권',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} onCall={() => {}} />}
-      subHeader={<StepProgress steps={STEPS} currentStep={4} mode="low-power" />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} onCall={() => {}} />}
+      subHeader={<StepProgress steps={STEPS} currentStep={4} mode="normal" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <div style={{ textAlign: 'center' }}>
         <div style={{ fontSize: 80, marginBottom: 24 }}>🖨️</div>
-        <p style={{ fontSize: 36, fontWeight: 700, color: '#ccc', marginBottom: 16 }}>증명서 발급중</p>
+        <p style={{ fontSize: 36, fontWeight: 700, color: '#333', marginBottom: 16 }}>증명서 발급중</p>
         <p style={{ fontSize: 26, color: '#888', marginBottom: 40 }}>잠시 기다려 주세요...</p>
-        <TextButton label="증명서발급" intent="primary" mode="low-power" size="lg" disabled />
+        <TextButton label="증명서발급" intent="primary" mode="normal" size="lg" disabled />
       </div>
     </KioskLayout>
   ),
@@ -1036,16 +1036,16 @@ export const LP_Screen11_발권: Story = {
 export const LP_Screen12_완료_영수증여부: Story = {
   name: '낮은화면 12 · 완료(영수증출력 여부)',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} />}
-      subHeader={<StepProgress steps={STEPS} currentStep={5} mode="low-power" />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} />}
+      subHeader={<StepProgress steps={STEPS} currentStep={5} mode="normal" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <div style={{ textAlign: 'center' }}>
-        <p style={{ fontSize: 36, color: '#ccc', marginBottom: 48 }}>영수증을 출력하시겠습니까?</p>
+        <p style={{ fontSize: 36, color: '#333', marginBottom: 48 }}>영수증을 출력하시겠습니까?</p>
         <div style={{ display: 'flex', gap: 24, justifyContent: 'center' }}>
-          <ConfirmButton variant="yes" mode="low-power" locale="ko" />
-          <ConfirmButton variant="no" mode="low-power" locale="ko" />
+          <ConfirmButton variant="yes" mode="normal" locale="ko" />
+          <ConfirmButton variant="no" mode="normal" locale="ko" />
         </div>
       </div>
     </KioskLayout>
@@ -1056,16 +1056,16 @@ export const LP_Screen12_완료_영수증여부: Story = {
 export const LP_Screen13_완료_영수증출력: Story = {
   name: '낮은화면 13 · 완료(영수증출력)',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} />}
-      subHeader={<StepProgress steps={STEPS} currentStep={5} mode="low-power" />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} />}
+      subHeader={<StepProgress steps={STEPS} currentStep={5} mode="normal" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <div style={{ textAlign: 'center' }}>
         <div style={{ fontSize: 80, marginBottom: 24 }}>🧾</div>
-        <p style={{ fontSize: 36, fontWeight: 700, color: '#ccc', marginBottom: 16 }}>영수증 출력중</p>
+        <p style={{ fontSize: 36, fontWeight: 700, color: '#333', marginBottom: 16 }}>영수증 출력중</p>
         <p style={{ fontSize: 26, color: '#888', marginBottom: 40 }}>영수증을 가져가세요</p>
-        <NavigationButton variant="home" mode="low-power" locale="ko" />
+        <NavigationButton variant="home" mode="normal" locale="ko" />
       </div>
     </KioskLayout>
   ),
@@ -1075,15 +1075,15 @@ export const LP_Screen13_완료_영수증출력: Story = {
 export const LP_Screen14_완료: Story = {
   name: '낮은화면 14 · 완료',
   render: () => (
-    <KioskLayout scale={SCALE} mode="low-power"
-      header={<KioskHeader mode="low-power" locale="ko" onHome={() => {}} />}
-      footer={<KioskFooter mode="low-power" locale="ko" />}
+    <KioskLayout scale={SCALE} mode="normal" lowScreen
+      header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
     >
       <div style={{ textAlign: 'center' }}>
         <div style={{ fontSize: 100, marginBottom: 32 }}>✅</div>
-        <p style={{ fontSize: 40, fontWeight: 700, color: '#ccc', marginBottom: 16 }}>이용해주셔서 감사합니다</p>
+        <p style={{ fontSize: 40, fontWeight: 700, color: '#333', marginBottom: 16 }}>이용해주셔서 감사합니다</p>
         <p style={{ fontSize: 28, color: '#888', marginBottom: 48 }}>잊으신 물건 없이 안녕히 가세요</p>
-        <NavigationButton variant="home" mode="low-power" locale="ko" />
+        <NavigationButton variant="home" mode="normal" locale="ko" />
       </div>
     </KioskLayout>
   ),
@@ -1121,7 +1121,7 @@ export const FlowSimulator: Story = {
       // 1: 증명종류 선택
       <KioskLayout key={1} scale={SCALE} mode={mode} header={header} subHeader={<StepProgress steps={STEPS} currentStep={0} mode={mode} />} footer={footer}>
         <div style={{ width: '100%' }}>
-          <p style={{ fontSize: 28, marginBottom: 16, textAlign: 'center', color: mode === 'low-power' ? '#ccc' : '#333' }}>발급받을 증명서를 선택하세요</p>
+          <p style={{ fontSize: 28, marginBottom: 16, textAlign: 'center', color: '#333' }}>발급받을 증명서를 선택하세요</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 24 }}>
             {CERT_LIST_PAGE1.map(item => (
               <ListItemButton key={item.name} primaryText={item.name} secondaryText={item.fee} mode={mode} onClick={next} />
@@ -1136,7 +1136,7 @@ export const FlowSimulator: Story = {
       // 3: 결제 방법 선택
       <KioskLayout key={3} scale={SCALE} mode={mode} header={header} subHeader={<StepProgress steps={STEPS} currentStep={4} mode={mode} />} footer={footer}>
         <div style={{ textAlign: 'center', width: '100%' }}>
-          <p style={{ fontSize: 30, fontWeight: 700, marginBottom: 32, color: mode === 'low-power' ? '#ccc' : '#333' }}>결제 수단을 선택하세요</p>
+          <p style={{ fontSize: 30, fontWeight: 700, marginBottom: 32, color: '#333' }}>결제 수단을 선택하세요</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', marginBottom: 24 }}>
             <PaymentButton variant="card" mode={mode} locale={locale} onClick={next} />
             <PaymentButton variant="samsung-pay" mode={mode} locale={locale} onClick={next} />
@@ -1148,7 +1148,7 @@ export const FlowSimulator: Story = {
       <KioskLayout key={4} scale={SCALE} mode={mode} header={<KioskHeader mode={mode} locale={locale} onHome={home} />} footer={footer}>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: 80, marginBottom: 24 }}>✅</div>
-          <p style={{ fontSize: 36, fontWeight: 700, marginBottom: 16, color: mode === 'low-power' ? '#ccc' : '#333' }}>이용해주셔서 감사합니다</p>
+          <p style={{ fontSize: 36, fontWeight: 700, marginBottom: 16, color: '#333' }}>이용해주셔서 감사합니다</p>
           <NavigationButton variant="home" mode={mode} locale={locale} onClick={home} />
         </div>
       </KioskLayout>,
@@ -1165,7 +1165,6 @@ export const FlowSimulator: Story = {
           <select value={mode} onChange={e => setMode(e.target.value as DisplayMode)} style={{ fontSize: 13 }}>
             <option value="normal">normal</option>
             <option value="high-contrast">high-contrast</option>
-            <option value="low-power">low-power</option>
           </select>
           <select value={locale} onChange={e => setLocale(e.target.value as Locale)} style={{ fontSize: 13 }}>
             <option value="ko">한국어</option>

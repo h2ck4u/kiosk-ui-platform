@@ -49,20 +49,17 @@ export function ListItemButton({
   const [isHovered, setIsHovered] = useState(false)
 
   const bgColor = (() => {
-    if (mode === 'low-power') return selected ? '#2a2a2a' : '#1a1a1a'
     if (mode === 'high-contrast') return selected ? '#000000' : '#ffffff'
     if (selected) return '#e8f0fe'
     return isHovered ? '#f5f5f5' : '#ffffff'
   })()
 
   const primaryColor = (() => {
-    if (mode === 'low-power') return selected ? '#ffffff' : '#cccccc'
     if (mode === 'high-contrast') return selected ? '#ffffff' : '#000000'
     return selected ? '#1a56db' : '#212121'
   })()
 
   const secondaryColor = (() => {
-    if (mode === 'low-power') return '#888888'
     if (mode === 'high-contrast') return primaryColor
     return selected ? '#5a8dee' : '#666666'
   })()

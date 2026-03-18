@@ -91,14 +91,6 @@ export function TextButton({
       const hc = INTENT_HC[intent]
       return { bg: hc.bg, text: hc.text, border: hc.border }
     }
-    if (mode === 'low-power') {
-      const isPrimary = intent === 'primary' || intent === 'danger'
-      return {
-        bg: isPrimary ? '#2a2a2a' : '#1a1a1a',
-        text: '#cccccc',
-        border: '#444444',
-      }
-    }
     const n = INTENT_NORMAL[intent]
     return {
       bg: isHovered ? n.hoverBg : n.bg,

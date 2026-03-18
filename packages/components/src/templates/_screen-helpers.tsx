@@ -58,7 +58,7 @@ export function KioskHeader({ mode, locale, onHome, onCall }: {
       )}
       <span style={{
         flex: 1, textAlign: 'center', fontSize: 28, fontWeight: 700,
-        color: mode === 'low-power' ? '#ccc' : '#333',
+        color: '#333',
       }}>
         시민구청
       </span>

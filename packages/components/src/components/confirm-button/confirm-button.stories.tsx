@@ -9,7 +9,7 @@ const meta: Meta<typeof ConfirmButton> = {
   argTypes: {
     variant:  { control: 'select', options: ['yes', 'no', 'select'], description: '버튼 종류' },
     locale:   { control: 'select', options: ['ko', 'en', 'ja', 'zh'], description: '표시 언어' },
-    mode:     { control: 'select', options: ['normal', 'high-contrast', 'low-power'], description: '디스플레이 모드' },
+    mode:     { control: 'select', options: ['normal', 'high-contrast'], description: '디스플레이 모드' },
     disabled: { control: 'boolean', description: '비활성화 여부' },
     onClick:  { action: 'clicked' },
   },
@@ -40,9 +40,6 @@ export const Disabled: Story = { args: { variant: 'yes', disabled: true } }
 
 /** 고대비 모드 (KWCAG 2.2) */
 export const HighContrast: Story = { args: { variant: 'no', mode: 'high-contrast' } }
-
-/** 저전력 모드 */
-export const LowPower: Story = { args: { variant: 'yes', mode: 'low-power' } }
 
 // ── 언어 ─────────────────────────────────────────────────────────────────────
 
@@ -75,7 +72,7 @@ export const AllVariants: Story = {
 export const AllModes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
+      {(['normal', 'high-contrast'] as const).map((mode) => (
         <div key={mode} style={{ textAlign: 'center' }}>
           <ConfirmButton {...args} mode={mode} />
           <p style={{ fontSize: 11, marginTop: 6, color: '#777' }}>{mode}</p>
@@ -117,7 +114,7 @@ export const EnabledVsDisabled: Story = {
 export const Matrix: Story = {
   render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
+      {(['normal', 'high-contrast'] as const).map((mode) => (
         <div key={mode}>
           <p style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 8, color: '#444' }}>
             mode: {mode}

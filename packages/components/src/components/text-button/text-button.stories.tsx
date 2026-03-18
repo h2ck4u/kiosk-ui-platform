@@ -11,7 +11,7 @@ const meta: Meta<typeof TextButton> = {
     intent:  { control: 'select', options: ['primary', 'secondary', 'danger', 'ghost'],
                description: 'primary(파랑 채움), secondary(흰 배경), danger(빨강), ghost(투명)' },
     size:    { control: 'select', options: ['sm', 'md', 'lg'] },
-    mode:    { control: 'select', options: ['normal', 'high-contrast', 'low-power'] },
+    mode:    { control: 'select', options: ['normal', 'high-contrast'] },
     disabled:{ control: 'boolean' },
     onClick: { action: 'clicked' },
   },
@@ -36,8 +36,6 @@ export const Large: Story = { args: { size: 'lg', label: '시작하기' } }
 // ── 상태 ─────────────────────────────────────────────────────────────────────
 export const Disabled: Story = { args: { disabled: true } }
 export const HighContrast: Story = { args: { mode: 'high-contrast', label: '확인' } }
-export const LowPower: Story = { args: { mode: 'low-power', label: '확인' } }
-
 // ── intent × 크기 매트릭스 ────────────────────────────────────────────────────
 
 export const IntentMatrix: Story = {
@@ -61,7 +59,7 @@ export const IntentMatrix: Story = {
 export const AllModes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
+      {(['normal', 'high-contrast'] as const).map((mode) => (
         <div key={mode}>
           <p style={{ fontSize: 11, marginBottom: 8 }}>mode: {mode}</p>
           <div style={{ display: 'flex', gap: 12 }}>

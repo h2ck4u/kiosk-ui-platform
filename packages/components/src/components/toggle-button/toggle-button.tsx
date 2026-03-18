@@ -63,14 +63,12 @@ export function ToggleButton({
   const selectedBorder = intent === 'negative' ? '#d32f2f' : '#1a56db'
 
   const bgColor = (() => {
-    if (mode === 'low-power') return selected ? '#333333' : '#1a1a1a'
     if (mode === 'high-contrast') return selected ? '#000000' : '#ffffff'
     if (selected) return selectedBg
     return isHovered ? '#f5f5f5' : '#ffffff'
   })()
 
   const textColor = (() => {
-    if (mode === 'low-power') return selected ? '#ffffff' : '#aaaaaa'
     if (mode === 'high-contrast') return selected ? '#ffffff' : '#000000'
     if (selected) return selectedText
     return '#212121'

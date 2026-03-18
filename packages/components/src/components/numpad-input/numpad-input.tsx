@@ -81,9 +81,9 @@ export function NumpadInput({
     onChange?.('')
   }
 
-  const bgColor = mode === 'low-power' ? '#111111' : mode === 'high-contrast' ? '#ffffff' : '#f8f8f8'
-  const keyBg = mode === 'low-power' ? '#1a1a1a' : mode === 'high-contrast' ? '#ffffff' : '#ffffff'
-  const keyText = mode === 'low-power' ? '#cccccc' : mode === 'high-contrast' ? '#000000' : '#212121'
+  const bgColor = mode === 'high-contrast' ? '#ffffff' : '#f8f8f8'
+  const keyBg = '#ffffff'
+  const keyText = mode === 'high-contrast' ? '#000000' : '#212121'
   const keyBorder = mode === 'high-contrast' ? '#000000' : '#b4b4b4'
 
   const displayValue = masked ? '●'.repeat(value.length) : value
@@ -125,7 +125,7 @@ export function NumpadInput({
         <p style={{
           fontFamily: 'var(--kiosk-font-family)',
           fontSize: 28,
-          color: mode === 'low-power' ? '#aaaaaa' : '#333',
+          color: '#333',
           textAlign: 'center',
           marginBottom: 16,
         }}>
@@ -135,7 +135,7 @@ export function NumpadInput({
 
       {/* 입력값 표시 */}
       <div style={{
-        background: mode === 'low-power' ? '#1a1a1a' : '#ffffff',
+        background: '#ffffff',
         border: `2px solid ${keyBorder}`,
         borderRadius: 8,
         padding: '16px 24px',
@@ -203,12 +203,12 @@ export function NumpadInput({
             height: 80,
             background: value.length > 0
               ? (mode === 'high-contrast' ? '#000000' : '#1a73e8')
-              : (mode === 'low-power' ? '#1a1a1a' : '#e0e0e0'),
+              : '#e0e0e0',
             border: `2px solid ${value.length > 0 ? (mode === 'high-contrast' ? '#000000' : '#1557b0') : keyBorder}`,
             borderRadius: 8,
             fontSize: 30,
             fontWeight: 700,
-            color: value.length > 0 ? '#ffffff' : (mode === 'low-power' ? '#444444' : '#9e9e9e'),
+            color: value.length > 0 ? '#ffffff' : '#9e9e9e',
             fontFamily: 'var(--kiosk-font-family)',
             cursor: value.length > 0 ? 'pointer' : 'not-allowed',
           }}

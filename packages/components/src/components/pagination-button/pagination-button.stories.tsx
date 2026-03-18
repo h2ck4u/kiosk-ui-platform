@@ -13,7 +13,7 @@ const meta: Meta<typeof PaginationButton> = {
     totalPages:   { control: 'number', description: '전체 페이지 (선택적 표시)' },
     disabled:     { control: 'boolean' },
     locale:       { control: 'select', options: ['ko', 'en', 'ja', 'zh'] },
-    mode:         { control: 'select', options: ['normal', 'high-contrast', 'low-power'] },
+    mode:         { control: 'select', options: ['normal', 'high-contrast'] },
     onClick:      { action: 'clicked' },
   },
   args: { variant: 'next', disabled: false, locale: 'ko', mode: 'normal' },
@@ -30,8 +30,6 @@ export const Prev: Story = { args: { variant: 'prev' } }
 export const WithPageInfo: Story = { args: { variant: 'next', currentPage: 1, totalPages: 3 } }
 export const Disabled: Story = { args: { variant: 'next', disabled: true } }
 export const HighContrast: Story = { args: { mode: 'high-contrast' } }
-export const LowPower: Story = { args: { mode: 'low-power' } }
-
 // ── 언어 ─────────────────────────────────────────────────────────────────────
 
 export const AllLocales: Story = {
@@ -51,7 +49,7 @@ export const AllLocales: Story = {
 export const AllModes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
+      {(['normal', 'high-contrast'] as const).map((mode) => (
         <div key={mode}>
           <p style={{ fontSize: 11, marginBottom: 8 }}>mode: {mode}</p>
           <div style={{ display: 'flex', gap: 8 }}>

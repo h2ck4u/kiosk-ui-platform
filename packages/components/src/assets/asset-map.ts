@@ -6,7 +6,6 @@
  *   normal      - default display
  *   hover       - pressed/focused
  *   disabled    - inactive
- *   low-power   - reduced brightness mode
  *   high-contrast - KWCAG 2.2 high contrast mode
  */
 
@@ -16,15 +15,11 @@ export const confirmAssets = {
     normal: new URL('./confirm/yes_normal.png', import.meta.url).href,
     hover: new URL('./confirm/yes_hover.png', import.meta.url).href,
     disabled: new URL('./confirm/yes_disabled.png', import.meta.url).href,
-    'low-power': new URL('./confirm/yes_low-power.png', import.meta.url).href,
-    'low-power_hover': new URL('./confirm/yes_low-power_hover.png', import.meta.url).href,
   },
   no: {
     normal: new URL('./confirm/no_normal.png', import.meta.url).href,
     hover: new URL('./confirm/no_hover.png', import.meta.url).href,
     disabled: new URL('./confirm/no_disabled.png', import.meta.url).href,
-    'low-power': new URL('./confirm/no_low-power.png', import.meta.url).href,
-    'low-power_hover': new URL('./confirm/no_low-power_hover.png', import.meta.url).href,
     'high-contrast': new URL('./confirm/no_high-contrast.png', import.meta.url).href,
     'high-contrast_hover': new URL('./confirm/no_high-contrast_hover.png', import.meta.url).href,
   },
@@ -156,7 +151,4 @@ export const languageRadioAssets = {
   normal: new URL('./language-radio/normal.png', import.meta.url).href,
   hover: new URL('./language-radio/hover.png', import.meta.url).href,
   disabled: new URL('./language-radio/disabled.png', import.meta.url).href,
-  'low-power': new URL('./language-radio/low-power.png', import.meta.url).href,
-  'low-power_hover': new URL('./language-radio/low-power_hover.png', import.meta.url).href,
-  'low-power_disabled': new URL('./language-radio/low-power_disabled.png', import.meta.url).href,
 } as const

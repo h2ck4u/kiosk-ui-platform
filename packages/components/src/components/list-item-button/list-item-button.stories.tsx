@@ -10,7 +10,7 @@ const meta: Meta<typeof ListItemButton> = {
     primaryText:   { control: 'text', description: '주 텍스트 (항목명)' },
     secondaryText: { control: 'text', description: '보조 텍스트 (소비자가 자유 결정)' },
     selected:      { control: 'boolean' },
-    mode:          { control: 'select', options: ['normal', 'high-contrast', 'low-power'] },
+    mode:          { control: 'select', options: ['normal', 'high-contrast'] },
     disabled:      { control: 'boolean' },
     onClick:       { action: 'clicked' },
   },
@@ -34,8 +34,6 @@ export const Selected: Story = { args: { selected: true } }
 export const WithoutSecondaryText: Story = { args: { secondaryText: undefined } }
 export const Disabled: Story = { args: { disabled: true } }
 export const HighContrast: Story = { args: { mode: 'high-contrast' } }
-export const LowPower: Story = { args: { mode: 'low-power' } }
-
 export const SelectedHighContrast: Story = {
   args: { selected: true, mode: 'high-contrast' },
 }
@@ -45,7 +43,7 @@ export const SelectedHighContrast: Story = {
 export const AllModes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: 400 }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
+      {(['normal', 'high-contrast'] as const).map((mode) => (
         <div key={mode}>
           <p style={{ fontSize: 11, marginBottom: 8, color: '#777' }}>mode: {mode}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>

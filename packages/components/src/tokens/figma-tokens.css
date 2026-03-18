@@ -49,19 +49,3 @@
   --kiosk-figma-color-semantic-confirm: #0000cc;
   --kiosk-figma-color-semantic-cancel: #cc0000;
 }
-
-[data-kiosk-mode="low-power"] {
-  --kiosk-figma-color-text-primary: #cccccc;
-  --kiosk-figma-color-text-secondary: #aaaaaa;
-  --kiosk-figma-color-text-disabled: #555555;
-  --kiosk-figma-color-text-inverse: #000000;
-  --kiosk-figma-color-bg-button: #1a1a1a;
-  --kiosk-figma-color-bg-hover: #2a2a2a;
-  --kiosk-figma-color-bg-disabled: #111111;
-  --kiosk-figma-color-bg-page: #000000;
-  --kiosk-figma-color-border-default: #444444;
-  --kiosk-figma-color-border-focus: #888888;
-  --kiosk-figma-color-border-disabled: #333333;
-  --kiosk-figma-color-semantic-confirm: #5588ff;
-  --kiosk-figma-color-semantic-cancel: #ff6666;
-}

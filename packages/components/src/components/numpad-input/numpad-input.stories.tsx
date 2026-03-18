@@ -12,7 +12,7 @@ const meta: Meta<typeof NumpadInput> = {
     masked:       { control: 'boolean' },
     confirmLabel: { control: 'text' },
     cancelLabel:  { control: 'text' },
-    mode:         { control: 'select', options: ['normal', 'high-contrast', 'low-power'] },
+    mode:         { control: 'select', options: ['normal', 'high-contrast'] },
     onConfirm:    { action: 'confirmed' },
     onCancel:     { action: 'cancelled' },
     onChange:     { action: 'changed' },
@@ -35,12 +35,10 @@ type Story = StoryObj<typeof NumpadInput>
 export const Default: Story = {}
 export const Masked: Story = { args: { label: '비밀번호 입력', masked: true, maxLength: 4 } }
 export const HighContrast: Story = { args: { mode: 'high-contrast' } }
-export const LowPower: Story = { args: { mode: 'low-power' } }
-
 export const AllModes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', justifyContent: 'center' }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
+      {(['normal', 'high-contrast'] as const).map((mode) => (
         <div key={mode} style={{ textAlign: 'center' }}>
           <p style={{ fontSize: 11, marginBottom: 8 }}>mode: {mode}</p>
           <NumpadInput {...args} mode={mode} />

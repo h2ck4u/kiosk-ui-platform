@@ -1,5 +1,5 @@
 /* @kiosk-ui/components - Design Tokens
- * 3 display modes: normal, high-contrast, low-power
+ * 2 display modes: normal, high-contrast
  * Source: kioskui.or.kr XFrame5 components
  */
 
@@ -92,27 +92,3 @@
   --kiosk-opacity-disabled: 0.6;
 }
 
-/* Low Power Mode - Reduced brightness */
-[data-kiosk-mode="low-power"] {
-  --kiosk-color-text-primary: #cccccc;
-  --kiosk-color-text-secondary: #aaaaaa;
-  --kiosk-color-text-disabled: #555555;
-  --kiosk-color-text-inverse: #000000;
-
-  --kiosk-color-bg-button: #1a1a1a;
-  --kiosk-color-bg-hover: #2a2a2a;
-  --kiosk-color-bg-disabled: #111111;
-  --kiosk-color-bg-page: #000000;
-
-  --kiosk-color-border: #444444;
-  --kiosk-color-border-focus: #888888;
-  --kiosk-color-border-disabled: #333333;
-
-  --kiosk-color-confirm: #5588ff;
-  --kiosk-color-cancel: #ff6666;
-
-  --kiosk-shadow-button: none;
-  --kiosk-shadow-button-hover: 0 0 0 2px #888888;
-
-  --kiosk-opacity-disabled: 0.3;
-}

@@ -9,7 +9,7 @@ const meta: Meta<typeof NavigationButton> = {
   argTypes: {
     variant:  { control: 'select', options: ['home', 'back', 'previous'], description: '이동 방향' },
     locale:   { control: 'select', options: ['ko', 'en', 'ja', 'zh'] },
-    mode:     { control: 'select', options: ['normal', 'high-contrast', 'low-power'] },
+    mode:     { control: 'select', options: ['normal', 'high-contrast'] },
     disabled: { control: 'boolean' },
     onClick:  { action: 'clicked' },
   },
@@ -25,8 +25,6 @@ export const Back: Story = { args: { variant: 'back' } }
 export const Previous: Story = { args: { variant: 'previous' } }
 export const Disabled: Story = { args: { variant: 'home', disabled: true } }
 export const HighContrast: Story = { args: { variant: 'home', mode: 'high-contrast' } }
-export const LowPower: Story = { args: { variant: 'home', mode: 'low-power' } }
-
 export const AllVariants: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
@@ -43,7 +41,7 @@ export const AllVariants: Story = {
 export const AllModes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
+      {(['normal', 'high-contrast'] as const).map((mode) => (
         <div key={mode}>
           <p style={{ fontSize: 11, marginBottom: 8, color: '#777' }}>mode: {mode}</p>
           <div style={{ display: 'flex', gap: 12 }}>

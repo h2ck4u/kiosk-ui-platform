@@ -8,7 +8,7 @@ const meta: Meta<typeof AccessibilityButton> = {
   tags: ['autodocs'],
   argTypes: {
     locale:   { control: 'select', options: ['ko', 'en', 'ja', 'zh'], description: 'aria-label 언어' },
-    mode:     { control: 'select', options: ['normal', 'high-contrast', 'low-power'] },
+    mode:     { control: 'select', options: ['normal', 'high-contrast'] },
     disabled: { control: 'boolean' },
     onClick:  { action: 'clicked' },
   },
@@ -22,13 +22,11 @@ type Story = StoryObj<typeof AccessibilityButton>
 export const Default: Story = {}
 export const Disabled: Story = { args: { disabled: true } }
 export const HighContrast: Story = { args: { mode: 'high-contrast' } }
-export const LowPower: Story = { args: { mode: 'low-power' } }
-
-/** 3개 모드 나란히 비교 */
+/** 2가지 모드 나란히 비교 */
 export const AllModes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
+      {(['normal', 'high-contrast'] as const).map((mode) => (
         <div key={mode} style={{ textAlign: 'center' }}>
           <AccessibilityButton {...args} mode={mode} />
           <p style={{ fontSize: 11, marginTop: 6 }}>{mode}</p>

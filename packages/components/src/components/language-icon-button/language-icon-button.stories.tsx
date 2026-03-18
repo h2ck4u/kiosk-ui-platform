@@ -9,7 +9,7 @@ const meta: Meta<typeof LanguageIconButton> = {
   argTypes: {
     variant:  { control: 'radio',  options: ['ko', 'generic'], description: 'KR 브랜드 아이콘 vs 중립 아이콘' },
     locale:   { control: 'select', options: ['ko', 'en', 'ja', 'zh'] },
-    mode:     { control: 'select', options: ['normal', 'high-contrast', 'low-power'] },
+    mode:     { control: 'select', options: ['normal', 'high-contrast'] },
     disabled: { control: 'boolean' },
   },
   args: { variant: 'ko', locale: 'ko', mode: 'normal', disabled: false },
@@ -54,7 +54,7 @@ export const BothVariants: Story = {
 export const AllModes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: 24 }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
+      {(['normal', 'high-contrast'] as const).map((mode) => (
         <div key={mode} style={{ textAlign: 'center' }}>
           <LanguageIconButton {...args} mode={mode} />
           <p style={{ fontSize: 11, marginTop: 4 }}>{mode}</p>

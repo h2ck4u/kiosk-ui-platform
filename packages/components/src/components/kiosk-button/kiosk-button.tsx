@@ -5,8 +5,6 @@ export interface KioskButtonAssets {
   normal: string
   hover?: string
   disabled?: string
-  'low-power'?: string
-  'low-power_hover'?: string
   'high-contrast'?: string
   'high-contrast_hover'?: string
 }
@@ -49,10 +47,6 @@ function resolveAsset(
   if (mode === 'high-contrast') {
     if (isHovered && assets['high-contrast_hover']) return assets['high-contrast_hover']
     if (assets['high-contrast']) return assets['high-contrast']
-  }
-  if (mode === 'low-power') {
-    if (isHovered && assets['low-power_hover']) return assets['low-power_hover']
-    if (assets['low-power']) return assets['low-power']
   }
   if (isHovered && assets.hover) return assets.hover
   return assets.normal

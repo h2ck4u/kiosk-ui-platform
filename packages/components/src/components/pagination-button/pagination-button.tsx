@@ -35,13 +35,11 @@ export function PaginationButton({
   const label = LABELS[variant][locale]
 
   const bgColor = (() => {
-    if (mode === 'low-power') return isHovered ? '#2a2a2a' : '#1a1a1a'
     if (mode === 'high-contrast') return isHovered ? '#000000' : '#ffffff'
     return isHovered ? '#f5f5f5' : '#ffffff'
   })()
 
   const textColor = (() => {
-    if (mode === 'low-power') return '#cccccc'
     if (mode === 'high-contrast') return isHovered ? '#ffffff' : '#000000'
     return '#212121'
   })()

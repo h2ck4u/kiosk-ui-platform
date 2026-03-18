@@ -11,7 +11,7 @@ const meta: Meta<typeof StepProgress> = {
   argTypes: {
     currentStep: { control: { type: 'range', min: 0, max: 5, step: 1 } },
     variant:     { control: 'select', options: ['numbered', 'dots', 'bar'] },
-    mode:        { control: 'select', options: ['normal', 'high-contrast', 'low-power'] },
+    mode:        { control: 'select', options: ['normal', 'high-contrast'] },
   },
   args: {
     steps: KIOSK_STEPS,
@@ -45,7 +45,7 @@ export const AllSteps: Story = {
 export const AllModes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
+      {(['normal', 'high-contrast'] as const).map((mode) => (
         <div key={mode}>
           <p style={{ fontSize: 11, marginBottom: 4, color: '#888' }}>mode: {mode}</p>
           <StepProgress {...args} mode={mode} />
