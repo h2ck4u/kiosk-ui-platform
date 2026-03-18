@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<map_list>
+	<map>
+		<screen version="2.0" scriptcode="java" title="[저]무인민원발급기_14" directory="/BIZ/103/06LP/" screenid="10306013" last_update_date="2024-01-12 14:00:42" width="1080" width_type="0" height="1920" height_type="0" canvas_width="2160" canvas_height="3840" on_load="eventfunc:screen_on_load()" funclist="screen_on_load"/>
+		<panel control_id="0" semantic_tag="0" x="0" y="0" right="0" bottom="0" width="1080" height="1920" back_color="00807D79" border="0" vertscrollbar_style="0" horzscrollbar_style="0" title_font="맑은 고딕,9,0,0,0,0">
+			<tab_order order_option="0" order_info="1015,1025,2"/>
+			<panel control_id="1015" semantic_tag="0" x="0" y="710" right="0" bottom="1150" width="1080" height="60" back_color="00C4C4C4" border="0" vertscrollbar_style="0" horzscrollbar_style="0" title_font="맑은 고딕,9,0,0,0,0">
+				<imagebox control_id="1016" x="451" y="12" right="450" bottom="13" width="179" height="35" transparent="1" border="0" padding="0,0,0,0" image="/BIZ/103/06LP/PUB/logo_gu_center.png" imagesize="2" image_width="179" image_height="35"/>
+			</panel>
+			<panel control_id="1025" semantic_tag="0" x="0" y="770" right="0" bottom="115" width="1080" height="1035" back_color="00F6F6F6" border="0" vertscrollbar_style="0" horzscrollbar_style="0" title_font="맑은 고딕,9,0,0,0,0">
+				<text control_id="137" autosize="0" x="0" y="244" right="0" bottom="721" width="1080" height="70" text="이용해주셔서 감사합니다" font="Noto Sans CJK KR,38,1,0,0,0" fore_color="00D27416" back_color="00F6F6F6" border_color="00413935" horz_align="1" line_height="80" letter_spacing="-3px" version="1.1"/>
+				<text control_id="188" autosize="0" x="0" y="314" right="0" bottom="651" width="1080" height="70" text="잊으신 물건 없이 안녕히 가세요" font="Noto Sans CJK KR,38,1,0,0,0" fore_color="000A0A0A" back_color="00F6F6F6" border_color="00413935" horz_align="1" line_height="80" letter_spacing="-3px" version="1.1"/>
+				<imagebox control_id="1027" x="180" y="499" right="180" bottom="286" width="720" height="250" transparent="1" border="0" padding="0,0,0,0" image="/BIZ/103/06LP/PUB/logo_gu_grey.png" imagesize="2" image_width="720" image_height="250"/>
+				<text control_id="1028" autosize="0" x="498" y="788" right="498" bottom="25" width="84" height="222" text="5" font="Noto Sans CJK KR,113,0,0,0,0" fore_color="000A0A0A" back_color="00F6F6F6" border_color="00413935" horz_align="1" line_height="80" letter_spacing="-3px" version="1.1"/>
+			</panel>
+			<panel control_id="2" semantic_tag="0" x="0" y="1805" right="0" bottom="0" width="1080" height="115" back_color="00F8F8F8" border="0" border_color="00312725" border_ex="0,0,00312725,,0,0-0-0-0,0,0,1,0,00FFFFFF,00E1E1E1^1,0,00000000,1^1,0,00312725,1^1,0,00312725,1^1,0,00312725,1" vertscrollbar_style="0" horzscrollbar_style="0" title_font="맑은 고딕,9,0,0,0,0">
+				<tab_order order_option="0" order_info="119,57,101"/>
+				<pushbutton control_id="57" x="658" y="18" right="222" bottom="17" width="200" height="80" style_class="0" text="접근성" font="Noto Sans CJK KR,32,500,0,0,0" fore_color="00FFFFFF" back_color="00F8F8F8" border="4" border_color="00FFFFFF" image_normal="/BIZ/103/06LP/PUB/comn_lowscreen_bt.png" image_down="/BIZ/103/06LP/PUB/comn_lowscreen_bt_o.png" image_vert_align="1" box_shadow_effect="0" horz_align="0" line_height="62" text_margin="61,0,0,0" text_wordellipsis="0" hover_bordercolor="00FFFFFF" hover_font="Noto Sans CJK KR,32,500,0,0,0" down_color_use="1" down_forecolor="00FFFFFF" down_backcolor="00F8F8F8" down_bordercolor="00FFFFFF" disable_color_use="1" disable_forecolor="00B2B2B2" disable_backcolor="00312725" letter_spacing="-2.1px" version="1.1"/>
+				<pushbutton control_id="101" x="867" y="18" right="13" bottom="17" width="200" height="80" style_class="0" text="직원호출" font="Noto Sans CJK KR,32,500,0,0,0" fore_color="00FFFFFF" back_color="00F8F8F8" border="4" border_color="00FFFFFF" image_normal="/BIZ/103/06LP/PUB/comn_call_bt.png" image_down="/BIZ/103/06LP/PUB/comn_call_bt_o.png" image_vert_align="1" box_shadow_effect="0" horz_align="0" line_height="62" text_margin="38,0,0,0" text_wordellipsis="0" hover_font="Noto Sans CJK KR,32,500,0,0,0" down_color_use="1" down_forecolor="00FFFFFF" down_backcolor="00F8F8F8" down_bordercolor="00FFFFFF" disable_color_use="1" disable_forecolor="00FFFFFF" letter_spacing="-2.1px" version="1.1"/>
+				<pushbutton control_id="119" x="502" y="18" right="498" bottom="17" width="80" height="80" style_class="0" text="" font="Noto Sans CJK KR,32,0,0,0,0" fore_color="000A0A0A" back_color="00F8F8F8" border="4" border_color="00E2E2E2" image_normal="/BIZ/103/06LP/PUB/language_lound_bt.png" image_down="/BIZ/103/06LP/PUB/language_lound_bt_o.png" box_shadow_effect="0" horz_align="0" text_margin="" hover_font="Noto Sans CJK KR,32,0,0,0,0" down_forecolor="00F8F8F8" down_backcolor="00F8F8F8" down_bordercolor="00FFFFFF" version="1.1"/>
+			</panel>
+		</panel>
+	</map>
+</map_list>

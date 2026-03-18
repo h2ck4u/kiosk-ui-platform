@@ -41,6 +41,15 @@ export type { TextButtonProps, TextButtonIntent, TextButtonSize } from './compon
 export { PaginationButton } from './components/pagination-button'
 export type { PaginationButtonProps, PaginationVariant } from './components/pagination-button'
 
+export { KioskLayout } from './components/kiosk-layout'
+export type { KioskLayoutProps } from './components/kiosk-layout'
+
+export { StepProgress } from './components/step-progress'
+export type { StepProgressProps, StepProgressVariant } from './components/step-progress'
+
+export { NumpadInput } from './components/numpad-input'
+export type { NumpadInputProps } from './components/numpad-input'
+
 // Provider & Hooks
 export { KioskProvider, useKiosk } from './providers/kiosk-provider'
 export type { KioskProviderProps } from './providers/kiosk-provider'
