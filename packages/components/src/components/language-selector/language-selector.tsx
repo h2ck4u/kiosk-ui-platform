@@ -69,10 +69,11 @@ export function LanguageSelector({
         // XFrame5 원본 치수
         width: 200,
         height: 80,
-        // 국기 PNG를 배경으로 (아이콘 포함)
+        // 국기 PNG를 배경으로 (아이콘 포함) — XFrame5 _xf_rdo 구조
         backgroundImage: `url(${imgSrc})`,
-        backgroundSize: '100% 100%',
+        backgroundSize: 'auto',        // 자연 크기(200×80px)
         backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'left center',
         backgroundColor: 'transparent',
         // 테두리 없음 — PNG 안에 포함
         border: 'none',
