@@ -1,6 +1,15 @@
 import React, { useState } from 'react'
-import { languageAssets } from '../../assets/asset-map'
+import { languageIconAssets } from '../../assets/asset-map'
 import type { DisplayMode, LanguageCode, Locale } from '../../types/kiosk'
+
+// LanguageIconButton과 동일한 round 아이콘 사용
+// ko → 태극기 아이콘 / en·ja·zh → generic 아이콘 (round 전용 이미지 없음)
+const ICON_ASSETS: Record<LanguageCode, typeof languageIconAssets.ko | typeof languageIconAssets.generic> = {
+  ko: languageIconAssets.ko,
+  en: languageIconAssets.generic,
+  ja: languageIconAssets.generic,
+  zh: languageIconAssets.generic,
+}
 
 const LABELS: Record<LanguageCode, Record<Locale, string>> = {
   ko: { ko: '한국어', en: 'Korean',   ja: '韓国語', zh: '韩语' },
@@ -31,7 +40,7 @@ export function LanguageSelector({
 }: LanguageSelectorProps) {
   const [isHovered, setIsHovered] = useState(false)
 
-  const assets = languageAssets[language]
+  const assets = ICON_ASSETS[language]
   const imgSrc = disabled
     ? (assets.disabled ?? assets.normal)
     : isHovered
