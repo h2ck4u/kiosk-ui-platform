@@ -85,7 +85,6 @@ export function NumpadInput({
   const keyBg = mode === 'low-power' ? '#1a1a1a' : mode === 'high-contrast' ? '#ffffff' : '#ffffff'
   const keyText = mode === 'low-power' ? '#cccccc' : mode === 'high-contrast' ? '#000000' : '#212121'
   const keyBorder = mode === 'high-contrast' ? '#000000' : '#b4b4b4'
-  const keyHoverBg = mode === 'low-power' ? '#2a2a2a' : '#f5f5f5'
 
   const displayValue = masked ? '●'.repeat(value.length) : value
 
@@ -96,7 +95,7 @@ export function NumpadInput({
     ['전체\n지우기', '0', '지우기'],
   ]
 
-  const keyStyle = (key: string): React.CSSProperties => ({
+  const keyStyle = (_key: string): React.CSSProperties => ({
     width: '100%',
     aspectRatio: '1.5',
     background: keyBg,
