@@ -79,26 +79,27 @@ export const paymentAssets = {
 } as const
 
 // ── Language ──────────────────────────────────────────────────────────────────
+// 출처: common_language_*_s / 10307_language_c (kioskui.or.kr)
 export const languageAssets = {
   ko: {
-    normal: new URL('./language/ko_normal.png', import.meta.url).href,
-    hover: new URL('./language/ko_hover.png', import.meta.url).href,
-    disabled: new URL('./language/ko_normal.png', import.meta.url).href,
+    normal:   new URL('./language/ko_normal.png',   import.meta.url).href,
+    hover:    new URL('./language/ko_hover.png',    import.meta.url).href,
+    disabled: new URL('./language/ko_disabled.png', import.meta.url).href,
   },
   en: {
-    normal: new URL('./language/en_normal.png', import.meta.url).href,
-    hover: new URL('./language/en_hover.png', import.meta.url).href,
-    disabled: new URL('./language/en_normal.png', import.meta.url).href,
+    normal:   new URL('./language/en_normal.png',   import.meta.url).href,
+    hover:    new URL('./language/en_hover.png',    import.meta.url).href,
+    disabled: new URL('./language/en_disabled.png', import.meta.url).href,
   },
   ja: {
-    normal: new URL('./language/ja_normal.png', import.meta.url).href,
-    hover: new URL('./language/ja_hover.png', import.meta.url).href,
-    disabled: new URL('./language/ja_normal.png', import.meta.url).href,
+    normal:   new URL('./language/ja_normal.png',   import.meta.url).href,
+    hover:    new URL('./language/ja_hover.png',    import.meta.url).href,
+    disabled: new URL('./language/ja_disabled.png', import.meta.url).href,
   },
   zh: {
-    normal: new URL('./language/zh_normal.png', import.meta.url).href,
-    hover: new URL('./language/zh_hover.png', import.meta.url).href,
-    disabled: new URL('./language/zh_normal.png', import.meta.url).href,
+    normal:   new URL('./language/zh_normal.png',   import.meta.url).href,
+    hover:    new URL('./language/zh_hover.png',    import.meta.url).href,
+    disabled: new URL('./language/zh_disabled.png', import.meta.url).href,
   },
 } as const
 
