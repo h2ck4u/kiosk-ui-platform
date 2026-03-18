@@ -1,274 +1,303 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
+import { KioskLayout } from '../components/kiosk-layout/kiosk-layout'
+import { StepProgress } from '../components/step-progress/step-progress'
+import { TextButton } from '../components/text-button/text-button'
+import { ListItemButton } from '../components/list-item-button/list-item-button'
+import { PaymentButton } from '../components/payment-button/payment-button'
+import { NavigationButton } from '../components/navigation-button/navigation-button'
+import {
+  KioskHeader,
+  KioskFooter,
+  STEPS,
+  CERT_LIST_PAGE1,
+  SCALE,
+} from './_screen-helpers'
+import type { DisplayMode, Locale } from '../types/kiosk'
 
 /**
- * 무인민원발급기 UI 템플릿 — kioskui.or.kr 공식 레퍼런스
+ * 무인민원발급기 화면 개요 스토리
  *
- * 각 스토리는 실제 무인민원발급기 화면 흐름을 보여줍니다.
- * 스크린샷 출처: https://www.kioskui.or.kr (무인정보단말기UI플랫폼)
- *
- * 전체 소스 파일(XFrame5)은 kioskui.or.kr > 템플릿 > 다운로드에서
- * 설문 완료 후 수동으로 다운로드할 수 있습니다.
- * 다운로드 후 docs/08-ui-resources/downloads/templates/{mode}/ 에 저장하세요.
+ * 각 모드별 대표 화면(시작안내)과 3가지 모드 비교를 보여줍니다.
+ * 개별 화면 상세는 Templates/무인민원발급기/화면구현 섹션을 참고하세요.
  */
-
-// ── 스크린샷 URL ──────────────────────────────────────────────────────────────
-const SCREENS = {
-  normal: {
-    '시작안내':           'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033910VGsMuL6H',
-    '기본선택(증명종류)':  'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033911tBbDpBHJ',
-    '기본선택(증명서)':   'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033913VvGpIT5i',
-    '본인확인(주민등록번호)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033914DbUHeQx9',
-    '본인확인(지문)':     'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033915IAIgjrVs',
-    '옵션선택(전체포함)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033916ew2en4aj',
-    '옵션선택(전체미포함)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033917nnnParIh',
-    '옵션선택(신청부수)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_00000000003391839BIqC23',
-    '내역확인':           'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033919LQjHC0K4',
-    '내역확인(무료)':     'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033920qZO0rCBi',
-    '결제하기(방법선택)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033921Xb2TkH2T',
-    '결제하기(결제)':     'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033922Mc6QQoWG',
-    '발권':               'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033923dyPmrvot',
-    '완료(영수증출력 여부)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033924ns7JqHdQ',
-    '완료(영수증출력)':   'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033925hcONQSCg',
-    '완료':               'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_0000000000339267kAiD7yo',
-  },
-  'high-contrast': {
-    '시작안내':           'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000032135axBIVgt9',
-    '기본선택(증명종류)':  'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000032136A1jjF8r5',
-    '기본선택(증명서)':   'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000032137QEav7u8e',
-    '본인확인(주민등록번호)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000032138uS7TdmLJ',
-    '본인확인(지문)':     'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033927WiavDCbg',
-    '옵션선택(전체미포함)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_0000000000339282Na8Zd8F',
-    '옵션선택(신청부수)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033929tqLtOsqK',
-    '내역확인':           'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033930LVLnLgYF',
-    '내역확인(무료)':     'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033931vCYZeHKl',
-    '결제하기(방법선택)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033932VaicT2yZ',
-    '결제하기(결제)':     'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033933wq0tblFy',
-    '발권':               'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033934Ar8p3Vhv',
-    '완료(영수증출력 여부)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033935IhLbizvq',
-    '완료(영수증출력)':   'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033936zDOA0hRX',
-    '완료':               'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033937hUTdhf3e',
-  },
-  'low-power': {
-    '시작안내':              'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033938g7bW5DrI',
-    '기본선택(증명종류,1페이지)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033939JIbhBWWW',
-    '기본선택(증명종류,2페이지)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033940YAsDjfpd',
-    '기본선택(증명서)':      'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033941GlKAfg0P',
-    '본인확인(주민등록번호)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_0000000000339429CYdwchN',
-    '본인확인(지문)':        'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033943D8guRm8m',
-    '옵션선택(전체포함)':    'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_0000000000339444nTLFR25',
-    '옵션선택(신청부수)':    'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033945lYKCltdH',
-    '내역확인(무료)':        'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_0000000000339461yi8OjHi',
-    '결제하기(방법선택,6버튼)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033947cDNw3EUX',
-    '결제하기(결제)':        'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033948ArYxntgu',
-    '발권':                  'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033949Axz8Hldk',
-    '완료(영수증출력 여부)': 'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033950NZcU80q2',
-    '완료(영수증출력)':      'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033951BDbnkhqx',
-    '완료':                  'https://www.kioskui.or.kr/icms/file/getImage.do?atchFileId=FILE_000000000033952hpUkcz3m',
-  },
-} as const
-
-// ── 공통 뷰어 컴포넌트 ─────────────────────────────────────────────────────────
-
-function ScreenViewer({
-  screens,
-  mode,
-  fallbackBg,
-}: {
-  screens: Record<string, string>
-  mode: string
-  fallbackBg: string
-}) {
-  const [selected, setSelected] = React.useState<string>(Object.keys(screens)[0])
-
-  return (
-    <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', maxWidth: 1100 }}>
-      {/* 화면 목록 */}
-      <div style={{
-        width: 220,
-        flexShrink: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 4,
-      }}>
-        <p style={{ fontSize: 11, color: '#888', marginBottom: 8 }}>
-          mode: <strong>{mode}</strong> | {Object.keys(screens).length}개 화면
-        </p>
-        {Object.keys(screens).map((name) => (
-          <button
-            key={name}
-            type="button"
-            onClick={() => setSelected(name)}
-            style={{
-              textAlign: 'left',
-              padding: '6px 10px',
-              fontSize: 12,
-              background: selected === name ? '#1a73e8' : '#f5f5f5',
-              color: selected === name ? '#fff' : '#333',
-              border: 'none',
-              borderRadius: 6,
-              cursor: 'pointer',
-              fontWeight: selected === name ? 700 : 400,
-            }}
-          >
-            {name}
-          </button>
-        ))}
-      </div>
-
-      {/* 스크린샷 */}
-      <div style={{
-        flex: 1,
-        background: fallbackBg,
-        borderRadius: 12,
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}>
-        <p style={{
-          fontSize: 14,
-          fontWeight: 700,
-          color: mode === 'low-power' ? '#ccc' : '#333',
-          padding: '12px 0 8px',
-        }}>
-          {selected}
-        </p>
-        <img
-          src={screens[selected as keyof typeof screens]}
-          alt={selected}
-          style={{ maxWidth: '100%', maxHeight: 600, objectFit: 'contain' }}
-          onError={(e) => {
-            (e.target as HTMLImageElement).style.display = 'none'
-          }}
-        />
-        <p style={{ fontSize: 11, color: '#999', padding: '8px 0', textAlign: 'center' }}>
-          출처: kioskui.or.kr | XFrame5 소스 파일은 사이트에서 설문 완료 후 다운로드
-        </p>
-      </div>
-    </div>
-  )
-}
-
-// ── Meta ──────────────────────────────────────────────────────────────────────
 
 const meta: Meta = {
   title: 'Templates/무인민원발급기',
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
 }
 
 export default meta
 type Story = StoryObj
 
-// ── 스토리: 3개 모드 ──────────────────────────────────────────────────────────
+// ── 광고/정보 영역 placeholder ────────────────────────────────────────────────
 
-/**
- * 기본 모드 — 16개 화면
- * 시작안내 → 증명서 선택 → 본인확인 → 옵션 → 내역 → 결제 → 발권 → 완료
- */
+function InfoArea({ mode }: { mode: DisplayMode }) {
+  const bg = mode === 'low-power' ? '#1a1a1a' : mode === 'high-contrast' ? '#000' : '#e8e8e8'
+  const color = mode === 'low-power' ? '#555' : mode === 'high-contrast' ? '#fff' : '#888'
+  return (
+    <div style={{
+      width: 800, height: 900, background: bg, borderRadius: 12,
+      margin: '0 auto 60px', display: 'flex', alignItems: 'center',
+      justifyContent: 'center', fontSize: 28, color,
+    }}>
+      정보/광고 영역
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 모드별 시작안내 화면
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/** 기본 모드 — 시작안내 */
 export const Normal: Story = {
   name: '기본 (Normal)',
   render: () => (
-    <div style={{ padding: 24 }}>
-      <ScreenViewer
-        screens={SCREENS.normal}
-        mode="normal"
-        fallbackBg="#f8f8f8"
-      />
-    </div>
+    <KioskLayout scale={SCALE} mode="normal"
+      header={<KioskHeader mode="normal" locale="ko" />}
+      footer={<KioskFooter mode="normal" locale="ko" />}
+    >
+      <div style={{ textAlign: 'center', width: '100%' }}>
+        <InfoArea mode="normal" />
+        <TextButton
+          label="시작하기" intent="primary"
+          width={550} height={180}
+          style={{ fontSize: 50, borderRadius: 15, borderColor: '#D27416' }}
+        />
+      </div>
+    </KioskLayout>
   ),
 }
 
-/**
- * 고대비 모드 (KWCAG 2.2) — 15개 화면
- * 색 대비 4.5:1 이상, 흑백 기반 UI
- */
+/** 고대비 모드 (KWCAG 2.2) — 시작안내 */
 export const HighContrast: Story = {
   name: '고대비 (High Contrast)',
   render: () => (
-    <div style={{ padding: 24, background: '#fff' }}>
-      <ScreenViewer
-        screens={SCREENS['high-contrast']}
-        mode="high-contrast"
-        fallbackBg="#ffffff"
-      />
-    </div>
+    <KioskLayout scale={SCALE} mode="high-contrast"
+      header={<KioskHeader mode="high-contrast" locale="ko" />}
+      footer={<KioskFooter mode="high-contrast" locale="ko" />}
+    >
+      <div style={{ textAlign: 'center', width: '100%' }}>
+        <InfoArea mode="high-contrast" />
+        <TextButton
+          label="시작하기" intent="primary" mode="high-contrast"
+          width={550} height={180}
+          style={{ fontSize: 50, borderRadius: 15 }}
+        />
+      </div>
+    </KioskLayout>
   ),
 }
 
-/**
- * 낮은 화면 / 저전력 모드 — 15개 화면
- * 화면 하단에 컨트롤 배치, 다크 배경, 대형 폰트
- */
+/** 낮은 화면(저전력) 모드 — 시작안내 */
 export const LowPower: Story = {
   name: '낮은 화면 (Low Power)',
   render: () => (
-    <div style={{ padding: 24, background: '#111' }}>
-      <ScreenViewer
-        screens={SCREENS['low-power']}
-        mode="low-power"
-        fallbackBg="#111111"
-      />
-    </div>
+    <KioskLayout scale={SCALE} mode="low-power"
+      header={<KioskHeader mode="low-power" locale="ko" />}
+      footer={<KioskFooter mode="low-power" locale="ko" />}
+    >
+      <div style={{ textAlign: 'center', width: '100%' }}>
+        <InfoArea mode="low-power" />
+        <TextButton
+          label="시작하기" intent="primary" mode="low-power"
+          width={550} height={180}
+          style={{ fontSize: 50, borderRadius: 15 }}
+        />
+      </div>
+    </KioskLayout>
   ),
 }
 
-/**
- * 3가지 모드 나란히 비교 — 시작안내 화면 기준
- */
+// ═══════════════════════════════════════════════════════════════════════════════
+// 3가지 모드 비교
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/** 시작안내 화면을 3가지 모드로 나란히 비교 */
 export const ModeComparison: Story = {
   name: '3가지 모드 비교 (시작안내)',
-  render: () => (
-    <div style={{ padding: 24, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-      {(['normal', 'high-contrast', 'low-power'] as const).map((mode) => (
-        <div key={mode} style={{ flex: 1, minWidth: 280 }}>
-          <p style={{ fontSize: 12, fontWeight: 700, marginBottom: 8, textAlign: 'center' }}>
-            {mode}
-          </p>
-          <img
-            src={SCREENS[mode]['시작안내']}
-            alt={`${mode} 시작안내`}
-            style={{
-              width: '100%',
-              borderRadius: 8,
-              border: '1px solid #eee',
-              background: mode === 'low-power' ? '#111' : '#fff',
-            }}
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.opacity = '0.3'
-            }}
-          />
-        </div>
-      ))}
-    </div>
-  ),
-}
-
-/**
- * 전체 발급 흐름 — 기본 모드 모든 화면
- */
-export const FullFlow: Story = {
-  name: '전체 흐름 (기본 모드)',
-  render: () => (
-    <div style={{ padding: 24 }}>
-      <p style={{ fontSize: 14, color: '#555', marginBottom: 16 }}>
-        무인민원발급기 전체 발급 프로세스 (기본 모드): {Object.keys(SCREENS.normal).length}개 화면
-      </p>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-        {Object.entries(SCREENS.normal).map(([name, src]) => (
-          <div key={name} style={{ width: 200, textAlign: 'center' }}>
-            <p style={{ fontSize: 11, marginBottom: 4, color: '#555' }}>{name}</p>
-            <img
-              src={src}
-              alt={name}
-              style={{ width: '100%', borderRadius: 6, border: '1px solid #eee' }}
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.opacity = '0.2'
-              }}
-            />
+  render: () => {
+    const modes: Array<{ mode: DisplayMode; label: string }> = [
+      { mode: 'normal',        label: '기본 (Normal)' },
+      { mode: 'high-contrast', label: '고대비 (High Contrast)' },
+      { mode: 'low-power',     label: '낮은 화면 (Low Power)' },
+    ]
+    return (
+      <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', justifyContent: 'center' }}>
+        {modes.map(({ mode, label }) => (
+          <div key={mode} style={{ textAlign: 'center' }}>
+            <p style={{ fontSize: 12, fontWeight: 700, marginBottom: 8, color: '#555' }}>
+              {label}
+            </p>
+            <KioskLayout scale={0.2} mode={mode}
+              header={<KioskHeader mode={mode} locale="ko" />}
+              footer={<KioskFooter mode={mode} locale="ko" />}
+            >
+              <div style={{ textAlign: 'center', width: '100%' }}>
+                <InfoArea mode={mode} />
+                <TextButton
+                  label="시작하기" intent="primary" mode={mode}
+                  width={550} height={180}
+                  style={{ fontSize: 50, borderRadius: 15 }}
+                />
+              </div>
+            </KioskLayout>
           </div>
         ))}
       </div>
-    </div>
-  ),
+    )
+  },
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 전체 흐름 시뮬레이터
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/**
+ * 무인민원발급기 전체 발급 흐름 시뮬레이터
+ * 시작안내 → 증명서 선택 → 결제 수단 선택 → 완료
+ */
+export const FullFlow: Story = {
+  name: '전체 흐름 (기본 모드)',
+  render: () => {
+    const [screenIdx, setScreenIdx] = useState(0)
+    const [mode, setMode] = useState<DisplayMode>('normal')
+    const [locale, setLocale] = useState<Locale>('ko')
+    const [sel, setSel] = useState<string | null>(null)
+
+    const next = () => setScreenIdx(i => Math.min(i + 1, screens.length - 1))
+    const prev = () => setScreenIdx(i => Math.max(0, i - 1))
+    const home = () => { setScreenIdx(0); setSel(null) }
+
+    const header = <KioskHeader mode={mode} locale={locale} onHome={home} onCall={() => {}} />
+    const footer = <KioskFooter mode={mode} locale={locale} />
+
+    const screens = [
+      // 0: 시작안내
+      <KioskLayout key={0} scale={SCALE} mode={mode}
+        header={<KioskHeader mode={mode} locale={locale} />}
+        footer={footer}
+      >
+        <div style={{ textAlign: 'center', width: '100%' }}>
+          <InfoArea mode={mode} />
+          <TextButton
+            label="시작하기" intent="primary" mode={mode}
+            width={550} height={180} onClick={next}
+            style={{ fontSize: 50, borderRadius: 15 }}
+          />
+        </div>
+      </KioskLayout>,
+
+      // 1: 증명서 선택
+      <KioskLayout key={1} scale={SCALE} mode={mode}
+        header={header}
+        subHeader={<StepProgress steps={STEPS} currentStep={0} mode={mode} />}
+        footer={footer}
+      >
+        <div style={{ width: '100%' }}>
+          <p style={{
+            fontSize: 32, fontWeight: 700, marginBottom: 24, textAlign: 'center',
+            color: mode === 'low-power' ? '#ccc' : '#333',
+          }}>
+            발급받을 증명서를 선택하세요
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 24 }}>
+            {CERT_LIST_PAGE1.map(item => (
+              <ListItemButton
+                key={item.name}
+                primaryText={item.name}
+                secondaryText={item.fee}
+                selected={sel === item.name}
+                mode={mode}
+                onClick={() => { setSel(item.name); next() }}
+              />
+            ))}
+          </div>
+        </div>
+      </KioskLayout>,
+
+      // 2: 결제 수단 선택
+      <KioskLayout key={2} scale={SCALE} mode={mode}
+        header={header}
+        subHeader={<StepProgress steps={STEPS} currentStep={4} mode={mode} />}
+        footer={footer}
+      >
+        <div style={{ textAlign: 'center', width: '100%' }}>
+          <p style={{
+            fontSize: 34, fontWeight: 700, marginBottom: 40,
+            color: mode === 'low-power' ? '#ccc' : '#333',
+          }}>
+            결제 수단을 선택하세요
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'center', marginBottom: 32 }}>
+            <PaymentButton variant="card"        mode={mode} locale={locale} onClick={next} />
+            <PaymentButton variant="samsung-pay" mode={mode} locale={locale} onClick={next} />
+            <PaymentButton variant="mobile"      mode={mode} locale={locale} onClick={next} />
+            <PaymentButton variant="barcode"     mode={mode} locale={locale} onClick={next} />
+            <PaymentButton variant="gift-card"   mode={mode} locale={locale} onClick={next} />
+          </div>
+          <TextButton label="이전" intent="secondary" mode={mode} size="sm" onClick={prev} />
+        </div>
+      </KioskLayout>,
+
+      // 3: 완료
+      <KioskLayout key={3} scale={SCALE} mode={mode}
+        header={<KioskHeader mode={mode} locale={locale} onHome={home} />}
+        footer={footer}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: 100, marginBottom: 32 }}>✅</div>
+          <p style={{
+            fontSize: 40, fontWeight: 700, marginBottom: 16,
+            color: mode === 'low-power' ? '#ccc' : '#333',
+          }}>
+            이용해주셔서 감사합니다
+          </p>
+          <p style={{
+            fontSize: 28, marginBottom: 48,
+            color: mode === 'low-power' ? '#888' : '#666',
+          }}>
+            잊으신 물건 없이 안녕히 가세요
+          </p>
+          <NavigationButton variant="home" mode={mode} locale={locale} onClick={home} />
+        </div>
+      </KioskLayout>,
+    ]
+
+    return (
+      <div>
+        {/* 컨트롤 바 */}
+        <div style={{
+          display: 'flex', gap: 12, marginBottom: 16,
+          alignItems: 'center', flexWrap: 'wrap',
+        }}>
+          <span style={{ fontSize: 13, color: '#888' }}>
+            화면 {screenIdx + 1} / {screens.length}
+          </span>
+          <button onClick={prev} disabled={screenIdx === 0} style={{ padding: '4px 12px', fontSize: 13 }}>
+            ← 이전
+          </button>
+          <button onClick={next} disabled={screenIdx === screens.length - 1} style={{ padding: '4px 12px', fontSize: 13 }}>
+            다음 →
+          </button>
+          <button onClick={home} style={{ padding: '4px 12px', fontSize: 13 }}>
+            처음으로
+          </button>
+          <select value={mode} onChange={e => setMode(e.target.value as DisplayMode)} style={{ fontSize: 13 }}>
+            <option value="normal">normal</option>
+            <option value="high-contrast">high-contrast</option>
+            <option value="low-power">low-power</option>
+          </select>
+          <select value={locale} onChange={e => setLocale(e.target.value as Locale)} style={{ fontSize: 13 }}>
+            <option value="ko">한국어</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="zh">中文</option>
+          </select>
+        </div>
+        {screens[screenIdx]}
+      </div>
+    )
+  },
 }
