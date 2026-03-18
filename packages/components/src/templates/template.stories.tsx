@@ -8,7 +8,6 @@ import { PaymentButton } from '../components/payment-button/payment-button'
 import { NavigationButton } from '../components/navigation-button/navigation-button'
 import {
   KioskHeader,
-  KioskFooter,
   KioskHomeFooter,
   KioskBottomNav,
   STEPS,
@@ -67,13 +66,17 @@ export const Normal: Story = {
   name: '기본 (Normal)',
   render: () => (
     <KioskLayout scale={SCALE} mode="normal"
-      header={<KioskHeader mode="normal" locale="ko" />}
-      footer={<KioskFooter mode="normal" locale="ko" />}
+      header={
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 88, background: '#FBFBFB' }}>
+          <span style={{ fontSize: 30, fontWeight: 700, color: '#333' }}>🔵 시민구청</span>
+        </div>
+      }
+      footer={<KioskHomeFooter locale="ko" />}
     >
       <div style={{ textAlign: 'center', width: '100%' }}>
         <InfoArea mode="normal" />
         <TextButton
-          label="시작하기" intent="primary"
+          label="🖐 시작하기" intent="primary"
           width={550} height={180}
           style={{ fontSize: 50, borderRadius: 15, borderColor: '#D27416' }}
         />
@@ -87,13 +90,17 @@ export const HighContrast: Story = {
   name: '고대비 (High Contrast)',
   render: () => (
     <KioskLayout scale={SCALE} mode="high-contrast"
-      header={<KioskHeader mode="high-contrast" locale="ko" />}
-      footer={<KioskFooter mode="high-contrast" locale="ko" />}
+      header={
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 88, background: '#000' }}>
+          <span style={{ fontSize: 30, fontWeight: 700, color: '#fff' }}>🔵 시민구청</span>
+        </div>
+      }
+      footer={<KioskHomeFooter locale="ko" />}
     >
       <div style={{ textAlign: 'center', width: '100%' }}>
         <InfoArea mode="high-contrast" />
         <TextButton
-          label="시작하기" intent="primary" mode="high-contrast"
+          label="🖐 시작하기" intent="primary" mode="high-contrast"
           width={550} height={180}
           style={{ fontSize: 50, borderRadius: 15 }}
         />
@@ -107,13 +114,17 @@ export const LowScreen: Story = {
   name: '낮은 화면 (Low Screen)',
   render: () => (
     <KioskLayout scale={SCALE} mode="normal" lowScreen
-      header={<KioskHeader mode="normal" locale="ko" />}
-      footer={<KioskFooter mode="normal" locale="ko" />}
+      header={
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 88, background: '#FBFBFB' }}>
+          <span style={{ fontSize: 30, fontWeight: 700, color: '#333' }}>🔵 시민구청</span>
+        </div>
+      }
+      footer={<KioskHomeFooter locale="ko" />}
     >
       <div style={{ textAlign: 'center', width: '100%' }}>
         <InfoArea mode="normal" />
         <TextButton
-          label="시작하기" intent="primary"
+          label="🖐 시작하기" intent="primary"
           width={550} height={180}
           style={{ fontSize: 50, borderRadius: 15 }}
         />
@@ -143,8 +154,12 @@ export const ModeComparison: Story = {
               {label}
             </p>
             <KioskLayout scale={0.2} mode={mode} lowScreen={lowScreen}
-              header={<KioskHeader mode={mode} locale="ko" />}
-              footer={<KioskFooter mode={mode} locale="ko" />}
+              header={
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 88, background: mode === 'high-contrast' ? '#000' : '#FBFBFB' }}>
+                  <span style={{ fontSize: 30, fontWeight: 700, color: mode === 'high-contrast' ? '#fff' : '#333' }}>🔵 시민구청</span>
+                </div>
+              }
+              footer={<KioskHomeFooter locale="ko" />}
             >
               <div style={{ textAlign: 'center', width: '100%' }}>
                 <InfoArea mode={mode} />
