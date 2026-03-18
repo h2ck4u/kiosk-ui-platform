@@ -50,6 +50,12 @@ export type { StepProgressProps, StepProgressVariant } from './components/step-p
 export { NumpadInput } from './components/numpad-input'
 export type { NumpadInputProps } from './components/numpad-input'
 
+export { FloatingActionButton } from './components/floating-action-button'
+export type { FloatingActionButtonProps } from './components/floating-action-button'
+
+export { CategoryTabBar } from './components/category-tab-bar'
+export type { CategoryTabBarProps, CategoryTab } from './components/category-tab-bar'
+
 // Provider & Hooks
 export { KioskProvider, useKiosk } from './providers/kiosk-provider'
 export type { KioskProviderProps } from './providers/kiosk-provider'
