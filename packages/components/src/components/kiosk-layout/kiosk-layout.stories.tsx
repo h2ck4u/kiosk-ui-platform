@@ -4,7 +4,6 @@ import { KioskLayout } from './kiosk-layout'
 import { TextButton } from '../text-button/text-button'
 import { LanguageSelector } from '../language-selector/language-selector'
 import { AccessibilityButton } from '../accessibility-button/accessibility-button'
-import { StaffCallButton } from '../staff-call-button/staff-call-button'
 
 const meta: Meta<typeof KioskLayout> = {
   title: 'Layout/KioskLayout',

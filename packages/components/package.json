@@ -21,6 +21,7 @@
     "build": "tsup && cp src/tokens/tokens.css dist/tokens.css",
     "dev": "tsup --watch",
     "type-check": "tsc --noEmit",
+    "lint": "eslint src/",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
