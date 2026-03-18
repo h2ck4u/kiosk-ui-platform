@@ -1,0 +1,22 @@
+{
+  "name": "kiosk-figma-tokens",
+  "version": "0.1.0",
+  "description": "Figma Variables → Design Tokens sync for @kiosk-ui/components",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync": "tsx fetch-tokens.ts && tsx transform-tokens.ts && node sd.build.mjs",
+    "sync:build-only": "node sd.build.mjs",
+    "fetch": "tsx fetch-tokens.ts",
+    "transform": "tsx transform-tokens.ts",
+    "build-tokens": "node sd.build.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "style-dictionary": "^4.0.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}
