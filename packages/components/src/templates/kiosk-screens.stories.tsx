@@ -1102,6 +1102,7 @@ export const FlowSimulator: Story = {
   render: () => {
     const [screenIdx, setScreenIdx] = useState(0)
     const [mode, setMode] = useState<DisplayMode>('normal')
+    const [lowScreen, setLowScreen] = useState(false)
     const [locale, setLocale] = useState<Locale>('ko')
     const next = () => setScreenIdx(i => Math.min(i + 1, SCREENS.length - 1))
     const prev = () => setScreenIdx(i => Math.max(0, i - 1))
@@ -1112,14 +1113,14 @@ export const FlowSimulator: Story = {
 
     const SCREENS = [
       // 0: 시작안내
-      <KioskLayout key={0} scale={SCALE} mode={mode} header={<KioskHeader mode={mode} locale={locale} />} footer={footer}>
+      <KioskLayout key={0} scale={SCALE} mode={mode} lowScreen={lowScreen} header={<KioskHeader mode={mode} locale={locale} />} footer={footer}>
         <div style={{ textAlign: 'center' }}>
           <div style={{ width: 700, height: 600, background: '#e8e8e8', borderRadius: 12, margin: '0 auto 48px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28, color: '#888' }}>광고 영역</div>
           <TextButton label="시작하기" intent="primary" mode={mode} width={550} height={180} onClick={next} style={{ fontSize: 50 }} />
         </div>
       </KioskLayout>,
       // 1: 증명종류 선택
-      <KioskLayout key={1} scale={SCALE} mode={mode} header={header} subHeader={<StepProgress steps={STEPS} currentStep={0} mode={mode} />} footer={footer}>
+      <KioskLayout key={1} scale={SCALE} mode={mode} lowScreen={lowScreen} header={header} subHeader={<StepProgress steps={STEPS} currentStep={0} mode={mode} />} footer={footer}>
         <div style={{ width: '100%' }}>
           <p style={{ fontSize: 28, marginBottom: 16, textAlign: 'center', color: '#333' }}>발급받을 증명서를 선택하세요</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 24 }}>
@@ -1130,11 +1131,11 @@ export const FlowSimulator: Story = {
         </div>
       </KioskLayout>,
       // 2: 본인확인
-      <KioskLayout key={2} scale={SCALE} mode={mode} header={header} subHeader={<StepProgress steps={STEPS} currentStep={1} mode={mode} />} footer={footer}>
+      <KioskLayout key={2} scale={SCALE} mode={mode} lowScreen={lowScreen} header={header} subHeader={<StepProgress steps={STEPS} currentStep={1} mode={mode} />} footer={footer}>
         <NumpadInput label="주민등록번호 앞 6자리를 입력하세요" maxLength={6} mode={mode} confirmLabel="다음" cancelLabel="취소" onConfirm={next} onCancel={prev} />
       </KioskLayout>,
       // 3: 결제 방법 선택
-      <KioskLayout key={3} scale={SCALE} mode={mode} header={header} subHeader={<StepProgress steps={STEPS} currentStep={4} mode={mode} />} footer={footer}>
+      <KioskLayout key={3} scale={SCALE} mode={mode} lowScreen={lowScreen} header={header} subHeader={<StepProgress steps={STEPS} currentStep={4} mode={mode} />} footer={footer}>
         <div style={{ textAlign: 'center', width: '100%' }}>
           <p style={{ fontSize: 30, fontWeight: 700, marginBottom: 32, color: '#333' }}>결제 수단을 선택하세요</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', marginBottom: 24 }}>
@@ -1145,7 +1146,7 @@ export const FlowSimulator: Story = {
         </div>
       </KioskLayout>,
       // 4: 완료
-      <KioskLayout key={4} scale={SCALE} mode={mode} header={<KioskHeader mode={mode} locale={locale} onHome={home} />} footer={footer}>
+      <KioskLayout key={4} scale={SCALE} mode={mode} lowScreen={lowScreen} header={<KioskHeader mode={mode} locale={locale} onHome={home} />} footer={footer}>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: 80, marginBottom: 24 }}>✅</div>
           <p style={{ fontSize: 36, fontWeight: 700, marginBottom: 16, color: '#333' }}>이용해주셔서 감사합니다</p>
@@ -1166,6 +1167,14 @@ export const FlowSimulator: Story = {
             <option value="normal">normal</option>
             <option value="high-contrast">high-contrast</option>
           </select>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 13, cursor: 'pointer' }}>
+            <input
+              type="checkbox"
+              checked={lowScreen}
+              onChange={e => setLowScreen(e.target.checked)}
+            />
+            낮은화면
+          </label>
           <select value={locale} onChange={e => setLocale(e.target.value as Locale)} style={{ fontSize: 13 }}>
             <option value="ko">한국어</option>
             <option value="en">English</option>

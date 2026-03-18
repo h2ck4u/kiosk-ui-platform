@@ -163,6 +163,7 @@ export const FullFlow: Story = {
   render: () => {
     const [screenIdx, setScreenIdx] = useState(0)
     const [mode, setMode] = useState<DisplayMode>('normal')
+    const [lowScreen, setLowScreen] = useState(false)
     const [locale, setLocale] = useState<Locale>('ko')
     const [sel, setSel] = useState<string | null>(null)
 
@@ -175,7 +176,7 @@ export const FullFlow: Story = {
 
     const screens = [
       // 0: 시작안내
-      <KioskLayout key={0} scale={SCALE} mode={mode}
+      <KioskLayout key={0} scale={SCALE} mode={mode} lowScreen={lowScreen}
         header={<KioskHeader mode={mode} locale={locale} />}
         footer={footer}
       >
@@ -190,7 +191,7 @@ export const FullFlow: Story = {
       </KioskLayout>,
 
       // 1: 증명서 선택
-      <KioskLayout key={1} scale={SCALE} mode={mode}
+      <KioskLayout key={1} scale={SCALE} mode={mode} lowScreen={lowScreen}
         header={header}
         subHeader={<StepProgress steps={STEPS} currentStep={0} mode={mode} />}
         footer={footer}
@@ -218,7 +219,7 @@ export const FullFlow: Story = {
       </KioskLayout>,
 
       // 2: 결제 수단 선택
-      <KioskLayout key={2} scale={SCALE} mode={mode}
+      <KioskLayout key={2} scale={SCALE} mode={mode} lowScreen={lowScreen}
         header={header}
         subHeader={<StepProgress steps={STEPS} currentStep={4} mode={mode} />}
         footer={footer}
@@ -242,7 +243,7 @@ export const FullFlow: Story = {
       </KioskLayout>,
 
       // 3: 완료
-      <KioskLayout key={3} scale={SCALE} mode={mode}
+      <KioskLayout key={3} scale={SCALE} mode={mode} lowScreen={lowScreen}
         header={<KioskHeader mode={mode} locale={locale} onHome={home} />}
         footer={footer}
       >
@@ -288,6 +289,14 @@ export const FullFlow: Story = {
             <option value="normal">normal</option>
             <option value="high-contrast">high-contrast</option>
           </select>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 13, cursor: 'pointer' }}>
+            <input
+              type="checkbox"
+              checked={lowScreen}
+              onChange={e => setLowScreen(e.target.checked)}
+            />
+            낮은화면
+          </label>
           <select value={locale} onChange={e => setLocale(e.target.value as Locale)} style={{ fontSize: 13 }}>
             <option value="ko">한국어</option>
             <option value="en">English</option>
