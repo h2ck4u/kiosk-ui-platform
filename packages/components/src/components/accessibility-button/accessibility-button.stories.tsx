@@ -3,7 +3,7 @@ import React from 'react'
 import { AccessibilityButton } from './accessibility-button'
 
 const meta: Meta<typeof AccessibilityButton> = {
-  title: 'Kiosk/AccessibilityButton',
+  title: 'Buttons/AccessibilityButton',
   component: AccessibilityButton,
   tags: ['autodocs'],
   argTypes: {

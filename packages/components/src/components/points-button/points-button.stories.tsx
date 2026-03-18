@@ -3,7 +3,7 @@ import React from 'react'
 import { PointsButton } from './points-button'
 
 const meta: Meta<typeof PointsButton> = {
-  title: 'Kiosk/PointsButton',
+  title: 'Buttons/PointsButton',
   component: PointsButton,
   tags: ['autodocs'],
   argTypes: {

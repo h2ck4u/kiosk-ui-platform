@@ -3,7 +3,7 @@ import React from 'react'
 import { LanguageIconButton } from './language-icon-button'
 
 const meta: Meta<typeof LanguageIconButton> = {
-  title: 'Kiosk/LanguageIconButton',
+  title: 'Language/LanguageIconButton',
   component: LanguageIconButton,
   tags: ['autodocs'],
   argTypes: {

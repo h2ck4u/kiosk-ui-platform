@@ -4,7 +4,7 @@ import type { LanguageCode } from '../../types/kiosk'
 import { LanguageRadioButton } from './language-radio-button'
 
 const meta: Meta<typeof LanguageRadioButton> = {
-  title: 'Kiosk/LanguageRadioButton',
+  title: 'Language/LanguageRadioButton',
   component: LanguageRadioButton,
   tags: ['autodocs'],
   argTypes: {

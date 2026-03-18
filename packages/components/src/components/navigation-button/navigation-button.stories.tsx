@@ -3,7 +3,7 @@ import React from 'react'
 import { NavigationButton } from './navigation-button'
 
 const meta: Meta<typeof NavigationButton> = {
-  title: 'Kiosk/NavigationButton',
+  title: 'Buttons/NavigationButton',
   component: NavigationButton,
   tags: ['autodocs'],
   argTypes: {

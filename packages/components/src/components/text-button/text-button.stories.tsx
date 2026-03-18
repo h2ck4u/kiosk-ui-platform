@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { TextButton } from './text-button'
 
 const meta: Meta<typeof TextButton> = {
-  title: 'Generic/TextButton',
+  title: 'Buttons/TextButton',
   component: TextButton,
   tags: ['autodocs'],
   argTypes: {

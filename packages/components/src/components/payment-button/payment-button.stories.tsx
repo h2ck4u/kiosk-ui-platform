@@ -6,7 +6,7 @@ import { PaymentButton } from './payment-button'
 const ALL_VARIANTS: PaymentMethod[] = ['card', 'barcode', 'mobile', 'samsung-pay', 'gift-card']
 
 const meta: Meta<typeof PaymentButton> = {
-  title: 'Kiosk/PaymentButton',
+  title: 'Buttons/PaymentButton',
   component: PaymentButton,
   tags: ['autodocs'],
   argTypes: {

@@ -4,7 +4,7 @@ import { PaginationButton } from './pagination-button'
 import { ListItemButton } from '../list-item-button/list-item-button'
 
 const meta: Meta<typeof PaginationButton> = {
-  title: 'Generic/PaginationButton',
+  title: 'Buttons/PaginationButton',
   component: PaginationButton,
   tags: ['autodocs'],
   argTypes: {

@@ -4,7 +4,7 @@ import type { LanguageCode } from '../../types/kiosk'
 import { LanguageSelector } from './language-selector'
 
 const meta: Meta<typeof LanguageSelector> = {
-  title: 'Kiosk/LanguageSelector',
+  title: 'Language/LanguageSelector',
   component: LanguageSelector,
   tags: ['autodocs'],
   argTypes: {

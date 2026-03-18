@@ -3,7 +3,7 @@ import React from 'react'
 import { StaffCallButton } from './staff-call-button'
 
 const meta: Meta<typeof StaffCallButton> = {
-  title: 'Kiosk/StaffCallButton',
+  title: 'Buttons/StaffCallButton',
   component: StaffCallButton,
   tags: ['autodocs'],
   argTypes: {

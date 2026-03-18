@@ -3,7 +3,7 @@ import React from 'react'
 import { ConfirmButton } from './confirm-button'
 
 const meta: Meta<typeof ConfirmButton> = {
-  title: 'Kiosk/ConfirmButton',
+  title: 'Buttons/ConfirmButton',
   component: ConfirmButton,
   tags: ['autodocs'],
   argTypes: {
