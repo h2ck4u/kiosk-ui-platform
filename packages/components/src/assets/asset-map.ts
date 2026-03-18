@@ -79,7 +79,8 @@ export const paymentAssets = {
 } as const
 
 // ── Language ──────────────────────────────────────────────────────────────────
-// 출처: common_language_*_s / 10307_language_c (kioskui.or.kr)
+// 출처: 10306_language_k/e/j/c (kioskui.or.kr)
+// 원본 디자인: PNG = background-image (국기 포함), 텍스트 span 우측 오버레이
 export const languageAssets = {
   ko: {
     normal:   new URL('./language/ko_normal.png',   import.meta.url).href,
@@ -89,17 +90,17 @@ export const languageAssets = {
   en: {
     normal:   new URL('./language/en_normal.png',   import.meta.url).href,
     hover:    new URL('./language/en_hover.png',    import.meta.url).href,
-    disabled: new URL('./language/en_disabled.png', import.meta.url).href,
+    disabled: new URL('./language/en_normal.png',   import.meta.url).href,
   },
   ja: {
     normal:   new URL('./language/ja_normal.png',   import.meta.url).href,
     hover:    new URL('./language/ja_hover.png',    import.meta.url).href,
-    disabled: new URL('./language/ja_disabled.png', import.meta.url).href,
+    disabled: new URL('./language/ja_normal.png',   import.meta.url).href,
   },
   zh: {
     normal:   new URL('./language/zh_normal.png',   import.meta.url).href,
     hover:    new URL('./language/zh_hover.png',    import.meta.url).href,
-    disabled: new URL('./language/zh_disabled.png', import.meta.url).href,
+    disabled: new URL('./language/zh_normal.png',   import.meta.url).href,
   },
 } as const
 

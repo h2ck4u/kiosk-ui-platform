@@ -1,21 +1,23 @@
+/**
+ * LanguageSelector — 언어 선택 버튼
+ *
+ * XFrame5 원본 (10306_language_k/e/j/c) 구조를 React로 재현:
+ * - PNG → background-image (국기 아이콘 포함)
+ * - 언어명 → <span> 우측 정렬 오버레이
+ * - 버튼 크기: 200×80px
+ * - 폰트: Noto Sans CJK KR, 32pt, letter-spacing: -2.1px
+ */
+
 import React, { useState } from 'react'
-import { languageIconAssets } from '../../assets/asset-map'
+import { languageAssets } from '../../assets/asset-map'
 import type { DisplayMode, LanguageCode, Locale } from '../../types/kiosk'
 
-// LanguageIconButton과 동일한 round 아이콘 사용
-// ko → 태극기 아이콘 / en·ja·zh → generic 아이콘 (round 전용 이미지 없음)
-const ICON_ASSETS: Record<LanguageCode, typeof languageIconAssets.ko | typeof languageIconAssets.generic> = {
-  ko: languageIconAssets.ko,
-  en: languageIconAssets.generic,
-  ja: languageIconAssets.generic,
-  zh: languageIconAssets.generic,
-}
-
-const LABELS: Record<LanguageCode, Record<Locale, string>> = {
-  ko: { ko: '한국어', en: 'Korean',   ja: '韓国語', zh: '韩语' },
-  en: { ko: 'English', en: 'English', ja: 'English', zh: 'English' },
-  ja: { ko: '日本語', en: 'Japanese', ja: '日本語', zh: '日语' },
-  zh: { ko: '中文',   en: 'Chinese',  ja: '中国語', zh: '中文' },
+// 원본 XFrame5의 언어명과 우측 패딩 (언어별로 상이)
+const LABEL_CONFIG: Record<LanguageCode, { labels: Record<Locale, string>; paddingRight: number }> = {
+  ko: { labels: { ko: '한국어', en: 'Korean',  ja: '韓国語', zh: '韩语'  }, paddingRight: 30 },
+  en: { labels: { ko: 'English', en: 'English', ja: 'English', zh: 'English' }, paddingRight: 13 },
+  ja: { labels: { ko: '日本語', en: 'Japanese', ja: '日本語', zh: '日语'  }, paddingRight: 21 },
+  zh: { labels: { ko: '中國語', en: 'Chinese',  ja: '中国語', zh: '中文'  }, paddingRight: 21 },
 }
 
 export interface LanguageSelectorProps {
@@ -40,21 +42,15 @@ export function LanguageSelector({
 }: LanguageSelectorProps) {
   const [isHovered, setIsHovered] = useState(false)
 
-  const assets = ICON_ASSETS[language]
+  const assets = languageAssets[language]
   const imgSrc = disabled
-    ? (assets.disabled ?? assets.normal)
+    ? assets.disabled
     : isHovered
     ? assets.hover
     : assets.normal
 
-  const label = LABELS[language][locale]
-
-  const isHighContrast = mode === 'high-contrast'
-  const borderColor = isHighContrast ? '#000000' : '#888888'
-  const textColor   = isHighContrast ? '#000000' : '#ffffff'
-  const bgColor     = isHovered
-    ? (isHighContrast ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.15)')
-    : 'transparent'
+  const { labels, paddingRight } = LABEL_CONFIG[language]
+  const label = labels[locale]
 
   return (
     <button
@@ -70,46 +66,37 @@ export function LanguageSelector({
       data-mode={mode}
       className={`kiosk-language-selector ${className ?? ''}`.trim()}
       style={{
+        // XFrame5 원본 치수
+        width: 200,
+        height: 80,
+        // 국기 PNG를 배경으로 (아이콘 포함)
+        backgroundImage: `url(${imgSrc})`,
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
+        backgroundColor: 'transparent',
+        // 테두리 없음 — PNG 안에 포함
+        border: 'none',
+        // 텍스트 우측 정렬
         display: 'flex',
+        justifyContent: 'flex-end',
         alignItems: 'center',
-        justifyContent: 'center',
-        gap: 10,
-        padding: '8px 20px 8px 8px',
-        border: `2px solid ${borderColor}`,
-        borderRadius: 999,
-        background: bgColor,
+        paddingLeft: 14,
+        paddingRight: 0,
+        // 상태
         cursor: disabled ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.4 : 1,
-        transition: 'background 0.15s',
-        whiteSpace: 'nowrap',
-        flex: 1,
-        minWidth: 0,
+        transition: 'opacity 0.15s',
       }}
     >
-      {/* 국기 아이콘 — 원형 클리핑 */}
-      <img
-        src={imgSrc}
-        alt=""
-        aria-hidden="true"
-        style={{
-          width: 58,
-          height: 58,
-          borderRadius: '50%',
-          objectFit: 'cover',
-          flexShrink: 0,
-          display: 'block',
-        }}
-        draggable={false}
-      />
-      {/* 언어 레이블 */}
       <span style={{
-        fontSize: 26,
-        fontWeight: 600,
-        color: textColor,
-        fontFamily: 'var(--kiosk-font-family)',
-        letterSpacing: '-0.02em',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
+        fontFamily: 'Noto Sans CJK KR, Noto Sans KR, sans-serif',
+        fontSize: 34,
+        fontWeight: 'normal',
+        letterSpacing: '-2.1px',
+        color: mode === 'high-contrast' ? '#000000' : '#0a0a0a',
+        paddingRight,
+        whiteSpace: 'nowrap',
+        pointerEvents: 'none',
       }}>
         {label}
       </span>
