@@ -1,0 +1,118 @@
+/* @kiosk-ui/components - Design Tokens
+ * 3 display modes: normal, high-contrast, low-power
+ * Source: kioskui.or.kr XFrame5 components
+ */
+
+:root,
+[data-kiosk-mode="normal"] {
+  /* Typography */
+  --kiosk-font-family: "Noto Sans KR", "Noto Sans CJK KR", sans-serif;
+  --kiosk-font-size-xs: 20px;
+  --kiosk-font-size-sm: 24px;
+  --kiosk-font-size-base: 30px;
+  --kiosk-font-size-lg: 34px;
+  --kiosk-font-size-xl: 40px;
+  --kiosk-font-weight-normal: 400;
+  --kiosk-font-weight-bold: 700;
+
+  /* Colors - Text */
+  --kiosk-color-text-primary: #0a0a0a;
+  --kiosk-color-text-secondary: #212121;
+  --kiosk-color-text-disabled: #9e9e9e;
+  --kiosk-color-text-inverse: #ffffff;
+
+  /* Colors - Background */
+  --kiosk-color-bg-button: #ffffff;
+  --kiosk-color-bg-hover: #f5f5f5;
+  --kiosk-color-bg-disabled: #e0e0e0;
+  --kiosk-color-bg-page: #f8f8f8;
+
+  /* Colors - Border */
+  --kiosk-color-border: #b4b4b4;
+  --kiosk-color-border-focus: #666e82;
+  --kiosk-color-border-disabled: #d0d0d0;
+
+  /* Colors - Semantic */
+  --kiosk-color-confirm: #1a73e8;
+  --kiosk-color-cancel: #d32f2f;
+
+  /* Spacing */
+  --kiosk-spacing-xs: 8px;
+  --kiosk-spacing-sm: 16px;
+  --kiosk-spacing-md: 24px;
+  --kiosk-spacing-lg: 32px;
+  --kiosk-spacing-xl: 48px;
+
+  /* Border Radius */
+  --kiosk-radius-button: 15px;
+  --kiosk-radius-sm: 8px;
+  --kiosk-radius-lg: 20px;
+
+  /* Size - Buttons */
+  --kiosk-btn-width: 285px;
+  --kiosk-btn-height: 280px;
+  --kiosk-btn-width-sm: 200px;
+  --kiosk-btn-height-sm: 196px;
+  --kiosk-btn-width-nav: 240px;
+  --kiosk-btn-height-nav: 88px;
+
+  /* Shadow */
+  --kiosk-shadow-button: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --kiosk-shadow-button-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+  /* Transition */
+  --kiosk-transition: 150ms ease-in-out;
+
+  /* Opacity */
+  --kiosk-opacity-disabled: 0.4;
+}
+
+/* High Contrast Mode - KWCAG 2.2 */
+[data-kiosk-mode="high-contrast"] {
+  --kiosk-color-text-primary: #000000;
+  --kiosk-color-text-secondary: #000000;
+  --kiosk-color-text-disabled: #555555;
+  --kiosk-color-text-inverse: #ffffff;
+
+  --kiosk-color-bg-button: #ffffff;
+  --kiosk-color-bg-hover: #ffff00;
+  --kiosk-color-bg-disabled: #cccccc;
+  --kiosk-color-bg-page: #ffffff;
+
+  --kiosk-color-border: #000000;
+  --kiosk-color-border-focus: #000000;
+  --kiosk-color-border-disabled: #555555;
+
+  --kiosk-color-confirm: #0000cc;
+  --kiosk-color-cancel: #cc0000;
+
+  --kiosk-shadow-button: 0 0 0 3px #000000;
+  --kiosk-shadow-button-hover: 0 0 0 4px #000000;
+
+  --kiosk-opacity-disabled: 0.6;
+}
+
+/* Low Power Mode - Reduced brightness */
+[data-kiosk-mode="low-power"] {
+  --kiosk-color-text-primary: #cccccc;
+  --kiosk-color-text-secondary: #aaaaaa;
+  --kiosk-color-text-disabled: #555555;
+  --kiosk-color-text-inverse: #000000;
+
+  --kiosk-color-bg-button: #1a1a1a;
+  --kiosk-color-bg-hover: #2a2a2a;
+  --kiosk-color-bg-disabled: #111111;
+  --kiosk-color-bg-page: #000000;
+
+  --kiosk-color-border: #444444;
+  --kiosk-color-border-focus: #888888;
+  --kiosk-color-border-disabled: #333333;
+
+  --kiosk-color-confirm: #5588ff;
+  --kiosk-color-cancel: #ff6666;
+
+  --kiosk-shadow-button: none;
+  --kiosk-shadow-button-hover: 0 0 0 2px #888888;
+
+  --kiosk-opacity-disabled: 0.3;
+}
