@@ -1,0 +1,201 @@
+@charset "utf-8";
+
+body {
+    padding:0px;
+    margin:0px;
+    font-family:'맑은 고딕';        /* 모든 컴포넌트 기본 폰트 */
+    font-size:9pt;                /* 기본 폰트 크기 */
+}
+
+/* PlaceHolder 스타일 지정 */
+::placeholder { 			/* Chrome, Firefox, Opera, Safari 10.1+ */
+	/* color: red; */
+	opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { 	/* Internet Explorer 10-11 */
+	/* color: red; */
+}
+
+::-ms-input-placeholder { 	/* Microsoft Edge */
+	/* color: red; */
+}
+
+/* 브라우저별 폰트별 수직 센터 정렬 보정을 위한 플렉스용 패딩 클래스 */
+/* 대상: 그리드, 텍스트
+/* padding-bottom, padding-top 스타일로 수직 위치 조정 */
+._xfd_padding {
+	/* padding-bottom:0px; padding-top:0px; */
+	padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+/* 브라우저별 폰트별 수직 센터 정렬 보정을 위한 탭 아이템 플렉스용 패딩 클래스 */
+/* 대상: 탭 아이템 */
+/* padding-bottom, padding-top 스타일로 수직 위치 조정 */
+._xfd_padding_tabitem_top {
+    padding-bottom:1px;     /* 탭 아이템은 기본적으로 탭 콘텐츠와 경계선이 중복되기 때문에 기본 1px 패딩 추가 */
+}
+._xfd_padding_tabitem_bottom {
+    padding-top:1px;        /* 탭 아이템은 기본적으로 탭 콘텐츠와 경계선이 중복되기 때문에 기본 1px 패딩 추가 */
+}
+
+/* 브라우저별 폰트별 수직 센터 정렬 보정을 위한 입력 필드용 패딩 클래스 */
+/* 대상: 한글, 일반, 숫자, 비밀번호, 콤보박스, 데이트픽커, 숫자스핀 */
+/* padding-bottom, padding-top 스타일로 수직 위치 조정 */
+._xfd_padding_input {
+    /* padding-bottom:1px; padding-top:1px; */
+}
+
+/* 브라우저별 폰트별 수직 센터 정렬 보정을 위한 버튼용 패딩 클래스 */
+/* 대상: 버튼, 라디오버튼, 체크박스, 트리아이템 텍스트 */
+/* top, bottom으로 수직 위치 조정 */
+._xfd_padding_button {
+    position:relative;
+    /* top:1px; bottom:1px; */
+}
+
+/* HTMLREADY 모드 IE 오류 보정용 보더 클래스 */
+._xfd_border_style_none {
+    /* border:0px none; */
+    border-style:none;
+}
+
+/***********************************************************/
+/* 반응형 적용을 위한 미디어 쿼리 시작 (BootStrap 해상도 구분 기준) */
+/***********************************************************/
+/* xs (Extra Small) */
+@media only screen and (max-width:767px) {
+    ._xf_rowbox_col_xs_0 { display:none; }
+    ._xf_rowbox_col_xs_1 { width:8.33333%; display:block; }
+    ._xf_rowbox_col_xs_2 { width:16.66666%; display:block; }
+    ._xf_rowbox_col_xs_3 { width:25%; display:block; }
+    ._xf_rowbox_col_xs_4 { width:33.33333%; display:block; }
+    ._xf_rowbox_col_xs_5 { width:41.66666%; display:block; }
+    ._xf_rowbox_col_xs_6 { width:50%; display:block; }
+    ._xf_rowbox_col_xs_7 { width:58.33333%; display:block; }
+    ._xf_rowbox_col_xs_8 { width:66.66666%; display:block; }
+    ._xf_rowbox_col_xs_9 { width:75%; display:block; }
+    ._xf_rowbox_col_xs_10 { width:83.33333%; display:block; }
+    ._xf_rowbox_col_xs_11 { width:91.66666%; display:block; }
+    ._xf_rowbox_col_xs_12 { width:100%; display:block; }
+}
+
+/* sm (Small) */
+/* (min-width: 768px) and (max-width: 991px) */
+/* @media only screen and (min-width:768px) { */
+@media only screen and (min-width:768px) and (max-width: 991px) {
+    ._xf_rowbox_col_sm_0 { display:none; }
+    ._xf_rowbox_col_sm_1 { width:8.33333%; display:block; }
+    ._xf_rowbox_col_sm_2 { width:16.66666%; display:block; }
+    ._xf_rowbox_col_sm_3 { width:25%; display:block; }
+    ._xf_rowbox_col_sm_4 { width:33.33333%; display:block; }
+    ._xf_rowbox_col_sm_5 { width:41.66666%; display:block; }
+    ._xf_rowbox_col_sm_6 { width:50%; display:block; }
+    ._xf_rowbox_col_sm_7 { width:58.33333%; display:block; }
+    ._xf_rowbox_col_sm_8 { width:66.66666%; display:block; }
+    ._xf_rowbox_col_sm_9 { width:75%; display:block; }
+    ._xf_rowbox_col_sm_10 { width:83.33333%; display:block; }
+    ._xf_rowbox_col_sm_11 { width:91.66666%; display:block; }
+    ._xf_rowbox_col_sm_12 { width:100%; display:block; }
+}
+
+/* md (Medium) */
+/* @media only screen and (min-width: 992px) { */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    ._xf_rowbox_col_md_0 { display:none; }
+    ._xf_rowbox_col_md_1 { width:8.33333%; display:block; }
+    ._xf_rowbox_col_md_2 { width:16.66666%; display:block; }
+    ._xf_rowbox_col_md_3 { width:25%; display:block; }
+    ._xf_rowbox_col_md_4 { width:33.33333%; display:block; }
+    ._xf_rowbox_col_md_5 { width:41.66666%; display:block; }
+    ._xf_rowbox_col_md_6 { width:50%; display:block; }
+    ._xf_rowbox_col_md_7 { width:58.33333%; display:block; }
+    ._xf_rowbox_col_md_8 { width:66.66666%; display:block; }
+    ._xf_rowbox_col_md_9 { width:75%; display:block; }
+    ._xf_rowbox_col_md_10 { width:83.33333%; display:block; }
+    ._xf_rowbox_col_md_11 { width:91.66666%; display:block; }
+    ._xf_rowbox_col_md_12 { width:100%; display:block; }
+}
+
+/* lg (Large) */
+@media only screen and (min-width: 1200px) {
+    ._xf_rowbox_col_lg_0 { display:none; }
+    ._xf_rowbox_col_lg_1 { width:8.33333%; display:block; }
+    ._xf_rowbox_col_lg_2 { width:16.66666%; display:block; }
+    ._xf_rowbox_col_lg_3 { width:25%; display:block; }
+    ._xf_rowbox_col_lg_4 { width:33.33333%; display:block; }
+    ._xf_rowbox_col_lg_5 { width:41.66666%; display:block; }
+    ._xf_rowbox_col_lg_6 { width:50%; display:block; }
+    ._xf_rowbox_col_lg_7 { width:58.33333%; display:block; }
+    ._xf_rowbox_col_lg_8 { width:66.66666%; display:block; }
+    ._xf_rowbox_col_lg_9 { width:75%; display:block; }
+    ._xf_rowbox_col_lg_10 { width:83.33333%; display:block; }
+    ._xf_rowbox_col_lg_11 { width:91.66666%; display:block; }
+    ._xf_rowbox_col_lg_12 { width:100%; display:block; }
+    ._xf_rowbox_col_lg_12 { width:100%; display:block; }
+}
+/***********************************************************/
+/* 반응형 적용을 위한 미디어 쿼리 끝 (BootStrap 기준) */
+/***********************************************************/
+
+/***********************************************************/
+/* HTML 하단 화면 로드 영역 스타일 시작 */
+/***********************************************************/
+
+._xf_loader_box {
+    position:fixed;
+    left: 0px;
+    bottom: 0px;
+    color: #333;
+    width: 100%;
+    height: 40px;
+    border-top: 1px dotted darkgray;
+    z-index: 2000000;
+    background-image: -webkit-linear-gradient(top, #fff 0%, #e0e0e0 100%);
+    background-image:      -o-linear-gradient(top, #fff 0%, #e0e0e0 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e0e0e0));
+    background-image:         linear-gradient(to bottom, #fff 0%, #e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    background-repeat: repeat-x;
+}
+
+._xf_loader_view {
+    width:100%;
+    height:100%;
+    display:table;
+}
+
+._xf_loader_content {
+    height: 100%;
+    width: 10000px;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+._xf_base_url, ._xf_screen_url, ._xf_screen_url_select, ._xf_language_select, ._xf_country_select {
+    box-sizing: border-box;
+    height: 20px;
+}
+
+._xf_screen_url {
+    width: 20px;
+    transition: width 0.8s;
+}
+
+._xf_screen_url:focus {
+    width: 200px;
+}
+
+._xf_load_btn, ._xf_hide_btn {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 20px;
+}
+/***********************************************************/
+/* HTML 하단 화면 로드 영역 스타일 끝 */
+/***********************************************************/
