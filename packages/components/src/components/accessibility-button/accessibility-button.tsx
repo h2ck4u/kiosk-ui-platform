@@ -61,7 +61,7 @@ export function AccessibilityButton({
         position: 'relative',        // _xf_btn_image(absolute)의 기준점
         width: 200,
         height: 80,
-        backgroundColor: '#ffffff',
+        backgroundColor: 'transparent',
         border: 'none',
         padding: 0,
         cursor: disabled ? 'not-allowed' : 'pointer',
@@ -93,7 +93,8 @@ export function AccessibilityButton({
           fontFamily: 'Noto Sans CJK KR, Noto Sans KR, sans-serif',
           fontSize: 34,
           fontWeight: 500,
-          color: mode === 'high-contrast' ? '#000000' : '#0a0a0a',
+          color: mode === 'high-contrast' ? '#000000' : '#ffffff',
+          letterSpacing: '-2.1px',
           paddingLeft: 65,           // XFrame5 원본값
           whiteSpace: 'pre',
           textOverflow: 'clip',
