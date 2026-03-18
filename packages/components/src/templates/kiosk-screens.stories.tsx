@@ -13,6 +13,8 @@ import { NavigationButton } from '../components/navigation-button/navigation-but
 import type { DisplayMode, Locale } from '../types/kiosk'
 import {
   KioskHeader,
+  KioskHomeFooter,
+  KioskBottomNav,
   KioskFooter,
   STEPS,
   CERT_LIST_PAGE1,
@@ -20,6 +22,16 @@ import {
   OPTION_ITEMS,
   SCALE,
 } from './_screen-helpers'
+import { FloatingActionButton } from '../components/floating-action-button/floating-action-button'
+import { CategoryTabBar } from '../components/category-tab-bar/category-tab-bar'
+
+const CERT_TABS = [
+  { id: 'search', label: '증명서찾기' },
+  { id: 'quick', label: '간편발급' },
+  { id: 'large', label: '큰글씨 보기' },
+  { id: 'location', label: '설치장소' },
+  { id: 'info', label: '이용안내' },
+]
 
 /**
  * 무인민원발급기 화면 구현 스토리
@@ -49,14 +61,30 @@ export const Screen01_시작안내: Story = {
   name: '기본 01 · 시작안내',
   render: () => (
     <KioskLayout scale={SCALE} mode="normal"
-      header={<KioskHeader mode="normal" locale="ko" />}
-      footer={<KioskFooter mode="normal" locale="ko" />}
+      header={
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 88, background: '#FBFBFB' }}>
+          <span style={{ fontSize: 30, fontWeight: 700, color: '#333' }}>🔵 시민구청</span>
+        </div>
+      }
+      footer={<KioskHomeFooter locale="ko" />}
     >
       <div style={{ textAlign: 'center', width: '100%' }}>
-        <div style={{ width: 800, height: 900, background: '#e8e8e8', borderRadius: 12, margin: '0 auto 60px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28, color: '#888' }}>
-          정보/광고 영역
+        {/* 배너 영역 */}
+        <div style={{
+          width: '100%', height: 900,
+          background: 'linear-gradient(135deg, #4a90d9 0%, #357abd 100%)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          flexDirection: 'column', gap: 16, marginBottom: 60,
+        }}>
+          <div style={{ fontSize: 36, fontWeight: 700, color: '#fff' }}>정보 · 광고 영역</div>
+          <div style={{ fontSize: 24, color: 'rgba(255,255,255,0.8)' }}>슬라이드 배너</div>
         </div>
-        <TextButton label="시작하기" intent="primary" width={550} height={180} style={{ fontSize: 50, borderRadius: 15, borderColor: '#D27416' }} />
+        {/* 시작하기 버튼 */}
+        <TextButton
+          label="🖐 시작하기" intent="primary"
+          width={550} height={180}
+          style={{ fontSize: 50, borderRadius: 15, borderColor: '#D27416' }}
+        />
       </div>
     </KioskLayout>
   ),
@@ -68,30 +96,47 @@ export const Screen02_기본선택_증명종류: Story = {
   render: () => {
     const [page, setPage] = useState(0)
     const [sel, setSel] = useState<string | null>(null)
+    const [activeTab, setActiveTab] = useState('search')
     const items = page === 0 ? CERT_LIST_PAGE1 : CERT_LIST_PAGE2
     return (
-      <KioskLayout scale={SCALE} mode="normal"
-        header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} onCall={() => {}} />}
-        subHeader={<StepProgress steps={STEPS} currentStep={0} />}
-        footer={<KioskFooter mode="normal" locale="ko" />}
-      >
-        <div style={{ width: '100%' }}>
-          <p style={{ fontSize: 32, fontWeight: 700, marginBottom: 24, textAlign: 'center' }}>
-            발급받을 증명서를 선택하세요
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 24 }}>
-            {items.map((item) => (
-              <ListItemButton key={item.name} primaryText={item.name} secondaryText={item.fee}
-                selected={sel === item.name} onClick={() => setSel(item.name)} />
-            ))}
+      <div style={{ position: 'relative' }}>
+        <KioskLayout scale={SCALE} mode="normal"
+          header={<KioskHeader mode="normal" locale="ko" onHome={() => {}} onCall={() => {}} />}
+          subHeader={
+            <>
+              <StepProgress steps={STEPS} currentStep={0} />
+              <CategoryTabBar tabs={CERT_TABS} activeTab={activeTab} onTabChange={setActiveTab} />
+            </>
+          }
+          footer={<KioskBottomNav mode="normal" locale="ko" />}
+        >
+          <div style={{ width: '100%', padding: '24px 16px', boxSizing: 'border-box' }}>
+            {/* 3열 그리드 */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginBottom: 24 }}>
+              {items.map((item) => (
+                <ListItemButton key={item.name} primaryText={item.name} secondaryText={item.fee}
+                  selected={sel === item.name} onClick={() => setSel(item.name)} />
+              ))}
+            </div>
+            {/* 페이지네이션 */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 16 }}>
+              <PaginationButton variant="prev" disabled={page === 0} onClick={() => setPage(0)} />
+              <span style={{ display: 'flex', alignItems: 'center', fontSize: 24, color: '#666' }}>{page + 1} / 2</span>
+              <PaginationButton variant="next" disabled={page === 1} onClick={() => setPage(1)} />
+            </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 16 }}>
-            <PaginationButton variant="prev" disabled={page === 0} onClick={() => setPage(0)} />
-            <span style={{ display: 'flex', alignItems: 'center', fontSize: 24, color: '#666' }}>{page + 1} / 2</span>
-            <PaginationButton variant="next" disabled={page === 1} onClick={() => setPage(1)} />
-          </div>
+        </KioskLayout>
+        {/* FAB — 우하단 절대 위치 */}
+        <div style={{
+          position: 'absolute',
+          bottom: `${115 * SCALE + 16}px`,
+          right: 16,
+          transform: `scale(${SCALE})`,
+          transformOrigin: 'bottom right',
+        }}>
+          <FloatingActionButton />
         </div>
-      </KioskLayout>
+      </div>
     )
   },
 }
